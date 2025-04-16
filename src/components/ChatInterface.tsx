@@ -63,8 +63,34 @@ const ChatInterface = () => {
     }, 1500);
   };
 
+  // Animation variants for message bubbles
+  const userBubbleVariants = {
+    hidden: { opacity: 0, scale: 0.95, x: 20 },
+    visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const aiBubbleVariants = {
+    hidden: { opacity: 0, scale: 0.95, x: -20 },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      x: 0, 
+      transition: { 
+        type: "spring",
+        damping: 12,
+        stiffness: 200,
+        duration: 0.6
+      } 
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full w-full mt-4">
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="flex flex-col h-full w-full mt-4"
+    >
       <h2 className="text-xl font-mukti font-semibold mb-4 text-divine-blue dark:text-white">Ask the Divine</h2>
       
       <div className="flex-1 overflow-y-auto mb-4 divine-card">
@@ -78,10 +104,10 @@ const ChatInterface = () => {
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.3 } }}
+                  variants={message.sender === 'user' ? userBubbleVariants : aiBubbleVariants}
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
@@ -101,7 +127,12 @@ const ChatInterface = () => {
         </div>
       </div>
       
-      <div className="flex gap-2">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="flex gap-2"
+      >
         <input
           type="text"
           value={input}
@@ -110,15 +141,18 @@ const ChatInterface = () => {
           placeholder="Ask about Hindu wisdom or spirituality..."
           className="flex-1 px-4 py-3 rounded-full border border-divine-lightGold/30 dark:border-divine-gold/20 bg-white/80 dark:bg-divine-blue/40 focus:outline-none focus:ring-2 focus:ring-divine-gold/50 dark:focus:ring-divine-gold/30"
         />
-        <button
+        <motion.button
           onClick={handleSend}
           disabled={input.trim() === ''}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 15 }}
           className={`divine-button ${input.trim() === '' ? 'opacity-70' : ''}`}
         >
           <SendHorizonal size={18} />
-        </button>
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 };
 
