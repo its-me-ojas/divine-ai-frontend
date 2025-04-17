@@ -1,7 +1,6 @@
-
 import { Home, BookOpen, Award, Bookmark, Menu, BookText } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -9,16 +8,26 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Navigation = () => {
   const location = useLocation();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [showNotifications, setShowNotifications] = useState(true);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setIsDarkMode(isDark);
+  }, []);
+
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark");
+    const newDarkModeState = !isDarkMode;
+    setIsDarkMode(newDarkModeState);
+    
+    if (newDarkModeState) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   };
 
-  // Animation variants for nav items
   const navItemVariants = {
     initial: { y: 20, opacity: 0 },
     animate: (i: number) => ({
@@ -35,7 +44,6 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Mobile Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-divine-blue border-t border-divine-lightGold/30 dark:border-divine-gold/20 flex items-center justify-around z-10">
         <motion.div
           custom={0}

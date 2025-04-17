@@ -18,9 +18,12 @@ import WisdomArticlePage from "./pages/WisdomArticlePage";
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Add dark mode class to the body element
+  // Add dark mode class to the body element if not already present
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    // Check if it's not already dark mode
+    if (!document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.add('dark');
+    }
   }, []);
 
   return (
