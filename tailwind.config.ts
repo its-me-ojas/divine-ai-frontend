@@ -65,11 +65,11 @@ export default {
 				},
 				// Divine AI custom colors
 				divine: {
-					saffron: "#FF9933",
-					blue: "#00264D",
-					gold: "#FFD700",
+					saffron: "#FF7F32", // Updated to the warmer orange as requested
+					blue: "#1c1c1c", // Dark background for dark mode
+					gold: "#FFA500", // Secondary orange for accents
 					lightGold: "#FFF0B3",
-					cream: "#FFF5E1"
+					cream: "#f0f0f0" // Light color for text in dark mode
 				}
 			},
 			borderRadius: {

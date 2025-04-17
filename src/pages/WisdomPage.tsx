@@ -55,7 +55,7 @@ const WisdomPage = () => {
           className="mb-8"
         >
           <h1 className="text-3xl font-bold font-mukti text-center mt-6 mb-2">Divine Wisdom</h1>
-          <p className="text-divine-blue/70 dark:text-white/70 text-center mb-8 max-w-2xl mx-auto">
+          <p className="text-divine-cream/90 dark:text-divine-cream/90 text-center mb-8 max-w-2xl mx-auto">
             Ancient wisdom for modern life. Explore spiritual insights from sacred texts to find clarity, purpose, and inner peace.
           </p>
         </motion.div>
@@ -73,10 +73,10 @@ const WisdomPage = () => {
                   <CardHeader>
                     <div className="text-xs font-medium text-divine-saffron mb-2">{article.category}</div>
                     <CardTitle className="text-xl">{article.title}</CardTitle>
-                    <CardDescription>{article.shortDescription}</CardDescription>
+                    <CardDescription className="text-divine-cream/70">{article.shortDescription}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center text-xs text-muted-foreground">
+                    <div className="flex items-center text-xs text-divine-cream/60">
                       <BookOpen size={14} className="mr-1" />
                       <span>5 min read</span>
                     </div>

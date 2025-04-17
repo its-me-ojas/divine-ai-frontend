@@ -50,42 +50,42 @@
   }
 
   .dark {
-    --background: 210 60% 10%;
-    --foreground: 39 100% 95%;
+    --background: 0 0% 11%; /* #1c1c1c dark grey */
+    --foreground: 0 0% 94%; /* #f0f0f0 off-white */
 
-    --card: 210 60% 12%;
-    --card-foreground: 39 100% 95%;
+    --card: 0 0% 7%; /* #121212 darker card bg */
+    --card-foreground: 0 0% 94%; /* #f0f0f0 off-white */
 
-    --popover: 210 60% 12%;
-    --popover-foreground: 39 100% 95%;
+    --popover: 0 0% 7%; /* #121212 darker popover bg */
+    --popover-foreground: 0 0% 94%; /* #f0f0f0 off-white */
 
-    --primary: 30 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 24 100% 60%; /* #FF7F32 warm orange */
+    --primary-foreground: 0 0% 100%; /* white text on orange */
 
-    --secondary: 210 25% 18%;
-    --secondary-foreground: 39 100% 95%;
+    --secondary: 0 0% 15%; /* #262626 dark grey for secondary */
+    --secondary-foreground: 0 0% 94%; /* #f0f0f0 off-white */
 
-    --muted: 210 25% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 0 0% 15%; /* #262626 muted dark grey */
+    --muted-foreground: 0 0% 82%; /* #d1d1d1 darker text */
 
-    --accent: 45 100% 50%;
-    --accent-foreground: 210 60% 16%;
+    --accent: 33 100% 50%; /* #FFA500 orange accent */
+    --accent-foreground: 0 0% 7%; /* #121212 dark text on accent */
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%; /* darker red for destructive */
+    --destructive-foreground: 210 40% 98%; /* light text on destructive */
 
-    --border: 210 25% 18%;
-    --input: 210 25% 18%;
-    --ring: 30 100% 50%;
+    --border: 0 0% 20%; /* #333333 dark border */
+    --input: 0 0% 20%; /* #333333 dark input bg */
+    --ring: 24 100% 60%; /* #FF7F32 warm orange ring */
     
-    --sidebar-background: 210 60% 10%;
-    --sidebar-foreground: 240 5% 96%;
-    --sidebar-primary: 30 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4% 16%;
-    --sidebar-accent-foreground: 240 5% 96%;
-    --sidebar-border: 240 4% 16%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-background: 0 0% 11%; /* #1c1c1c dark grey */
+    --sidebar-foreground: 0 0% 94%; /* #f0f0f0 off-white */
+    --sidebar-primary: 24 100% 60%; /* #FF7F32 warm orange */
+    --sidebar-primary-foreground: 0 0% 100%; /* white */
+    --sidebar-accent: 0 0% 15%; /* #262626 sidebar accent */
+    --sidebar-accent-foreground: 0 0% 94%; /* #f0f0f0 off-white */
+    --sidebar-border: 0 0% 15%; /* #262626 sidebar border */
+    --sidebar-ring: 24 100% 60%; /* #FF7F32 warm orange ring */
   }
 }
 
@@ -109,7 +109,7 @@
 
 @layer components {
   .divine-card {
-    @apply bg-white/90 dark:bg-divine-blue/40 rounded-2xl shadow-md border border-divine-lightGold/30 dark:border-divine-gold/20 backdrop-blur-sm p-6;
+    @apply bg-white/90 dark:bg-divine-blue/90 rounded-2xl shadow-md border border-divine-lightGold/30 dark:border-divine-saffron/20 backdrop-blur-sm p-6;
   }
   
   .divine-button {
@@ -117,7 +117,7 @@
   }
   
   .divine-button-secondary {
-    @apply bg-divine-cream hover:bg-divine-cream/90 dark:bg-divine-blue/60 dark:hover:bg-divine-blue/80 text-divine-blue dark:text-white font-medium rounded-full px-6 py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow border border-divine-lightGold/50 dark:border-divine-gold/20;
+    @apply bg-divine-cream hover:bg-divine-cream/90 dark:bg-divine-blue/80 dark:hover:bg-divine-blue/90 text-divine-blue dark:text-divine-cream font-medium rounded-full px-6 py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow border border-divine-lightGold/50 dark:border-divine-saffron/30;
   }
   
   .nav-item {
