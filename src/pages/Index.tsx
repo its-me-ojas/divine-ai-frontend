@@ -7,9 +7,12 @@ import ChatInterface from "../components/ChatInterface";
 import Navigation from "../components/Navigation";
 import FloatingChatButton from "../components/FloatingChatButton";
 import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
+  const [showChat, setShowChat] = useState(false);
+  const dailyVerseRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   
@@ -22,22 +25,34 @@ const Index = () => {
     verse: 47
   };
 
+  // Function to scroll to daily verse
+  const scrollToDailyVerse = () => {
+    if (dailyVerseRef.current) {
+      dailyVerseRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Function to scroll to chat
   const scrollToChat = () => {
-    if (chatRef.current) {
-      chatRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    setShowChat(true);
+    
+    // Small delay to ensure chat is rendered before scrolling
+    setTimeout(() => {
+      if (chatRef.current) {
+        chatRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   // Check if user is coming back to home page
   useEffect(() => {
     if (location.pathname === "/" && !showSplash) {
-      // If animation has been shown already, automatically scroll to chat
+      // If animation has been shown already, automatically scroll to daily verse
       const hasShownHomeAnimation = localStorage.getItem("homeAnimationShown") === "true";
       
       if (hasShownHomeAnimation) {
         // Small delay to ensure components are rendered
-        setTimeout(scrollToChat, 300);
+        setTimeout(scrollToDailyVerse, 300);
       } else {
         // Mark home animation as shown
         localStorage.setItem("homeAnimationShown", "true");
@@ -54,10 +69,24 @@ const Index = () => {
           <Header />
           
           <main className="py-4">
-            <DailyVerse verse={dailyVerse} />
-            <div ref={chatRef}>
-              <ChatInterface />
+            <div ref={dailyVerseRef}>
+              <DailyVerse verse={dailyVerse} />
             </div>
+            
+            <AnimatePresence>
+              {showChat && (
+                <motion.div 
+                  ref={chatRef}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-8"
+                >
+                  <ChatInterface />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </main>
           
           <Navigation />

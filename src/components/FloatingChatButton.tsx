@@ -50,6 +50,7 @@ const FloatingChatButton = ({ onClick }: FloatingChatButtonProps) => {
         className="absolute inset-0 rounded-full bg-divine-gold/20"
         animate={{ 
           scale: [1, 1.1, 1],
+          y: [0, -5, 0]
         }}
         transition={{ 
           duration: 2, 
