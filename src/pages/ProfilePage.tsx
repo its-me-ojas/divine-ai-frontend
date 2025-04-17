@@ -110,15 +110,16 @@ const ProfilePage = () => {
             </motion.div>
             
             <motion.div variants={childVariants}>
-              <Button 
-                className="divine-button w-full mt-2 gap-2"
+              <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <Save size={16} />
-                Save Changes
-              </Button>
+                <Button className="divine-button w-full mt-2 gap-2">
+                  <Save size={16} />
+                  Save Changes
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
           
@@ -156,15 +157,18 @@ const ProfilePage = () => {
               variants={childVariants}
               className="border-t border-divine-lightGold/30 dark:border-divine-gold/20 pt-4 mt-2"
             >
-              <Button 
-                variant="outline" 
-                className="w-full border-divine-saffron/70 text-divine-saffron hover:text-divine-saffron hover:bg-divine-saffron/10"
+              <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                Log Out
-              </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-divine-saffron/70 text-divine-saffron hover:text-divine-saffron hover:bg-divine-saffron/10"
+                >
+                  Log Out
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         </main>

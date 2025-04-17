@@ -1,13 +1,17 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SplashScreen from "../components/SplashScreen";
 import Header from "../components/Header";
 import DailyVerse from "../components/DailyVerse";
 import ChatInterface from "../components/ChatInterface";
 import Navigation from "../components/Navigation";
+import FloatingChatButton from "../components/FloatingChatButton";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
   
   // Daily verse data
   const dailyVerse = {
@@ -17,6 +21,29 @@ const Index = () => {
     chapter: 2,
     verse: 47
   };
+
+  // Function to scroll to chat
+  const scrollToChat = () => {
+    if (chatRef.current) {
+      chatRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Check if user is coming back to home page
+  useEffect(() => {
+    if (location.pathname === "/" && !showSplash) {
+      // If animation has been shown already, automatically scroll to chat
+      const hasShownHomeAnimation = localStorage.getItem("homeAnimationShown") === "true";
+      
+      if (hasShownHomeAnimation) {
+        // Small delay to ensure components are rendered
+        setTimeout(scrollToChat, 300);
+      } else {
+        // Mark home animation as shown
+        localStorage.setItem("homeAnimationShown", "true");
+      }
+    }
+  }, [location.pathname, showSplash]);
 
   return (
     <>
@@ -28,12 +55,17 @@ const Index = () => {
           
           <main className="py-4">
             <DailyVerse verse={dailyVerse} />
-            <ChatInterface />
+            <div ref={chatRef}>
+              <ChatInterface />
+            </div>
           </main>
           
           <Navigation />
         </div>
       </div>
+      
+      {/* Floating chat button */}
+      {!showSplash && <FloatingChatButton onClick={scrollToChat} />}
     </>
   );
 };

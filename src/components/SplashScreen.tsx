@@ -8,12 +8,25 @@ interface SplashScreenProps {
 
 const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [isAnimating, setIsAnimating] = useState(true);
+  const [shouldShowSplash, setShouldShowSplash] = useState(true);
 
   useEffect(() => {
+    // Check if the splash screen has been shown in this session
+    const splashShown = localStorage.getItem("splashScreenShown");
+    
+    if (splashShown === "true") {
+      // If already shown, skip the splash screen
+      setShouldShowSplash(false);
+      onComplete();
+      return;
+    }
+
     // Animation timing as specified: 2s for display + 0.75s for fade out
     const timer = setTimeout(() => {
       setIsAnimating(false);
       const fadeOutTimer = setTimeout(() => {
+        // Set the flag in localStorage
+        localStorage.setItem("splashScreenShown", "true");
         onComplete();
       }, 750); // 0.75s for fade out
       return () => clearTimeout(fadeOutTimer);
@@ -21,6 +34,9 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
     return () => clearTimeout(timer);
   }, [onComplete]);
+
+  // If splash shouldn't be shown, return null
+  if (!shouldShowSplash) return null;
 
   return (
     <AnimatePresence>
