@@ -1,5 +1,5 @@
 
-import { Home, BookOpen, Award, Bookmark, Menu } from "lucide-react";
+import { Home, BookOpen, Award, Bookmark, Menu, BookText } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -74,6 +74,21 @@ const Navigation = () => {
           variants={navItemVariants}
           whileTap="tap"
         >
+          <Link to="/wisdom" className={`nav-item ${location.pathname.startsWith("/wisdom") ? "active" : ""}`}>
+            <motion.div whileHover={{ y: -3 }} transition={{ type: "spring", stiffness: 300 }}>
+              <BookText size={20} />
+              <span className="text-xs mt-1">Wisdom</span>
+            </motion.div>
+          </Link>
+        </motion.div>
+        
+        <motion.div
+          custom={3}
+          initial="initial"
+          animate="animate"
+          variants={navItemVariants}
+          whileTap="tap"
+        >
           <Link to="/streaks" className={`nav-item ${location.pathname === "/streaks" ? "active" : ""}`}>
             <motion.div whileHover={{ y: -3 }} transition={{ type: "spring", stiffness: 300 }}>
               <Award size={20} />
@@ -83,7 +98,7 @@ const Navigation = () => {
         </motion.div>
         
         <motion.div
-          custom={3}
+          custom={4}
           initial="initial"
           animate="animate"
           variants={navItemVariants}
@@ -98,7 +113,7 @@ const Navigation = () => {
         </motion.div>
         
         <motion.div
-          custom={4}
+          custom={5}
           initial="initial"
           animate="animate"
           variants={navItemVariants}
