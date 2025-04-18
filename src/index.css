@@ -50,13 +50,13 @@
   }
 
   .dark {
-    --background: 210 60% 10%;
+    --background: 210 60% 7%;
     --foreground: 39 100% 95%;
 
-    --card: 210 60% 12%;
+    --card: 210 60% 9%;
     --card-foreground: 39 100% 95%;
 
-    --popover: 210 60% 12%;
+    --popover: 210 60% 9%;
     --popover-foreground: 39 100% 95%;
 
     --primary: 30 100% 50%;
@@ -68,7 +68,7 @@
     --muted: 210 25% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 45 100% 50%;
+    --accent: 35 100% 50%;
     --accent-foreground: 210 60% 16%;
 
     --destructive: 0 63% 31%;
@@ -78,7 +78,7 @@
     --input: 210 25% 18%;
     --ring: 30 100% 50%;
     
-    --sidebar-background: 210 60% 10%;
+    --sidebar-background: 210 60% 7%;
     --sidebar-foreground: 240 5% 96%;
     --sidebar-primary: 30 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -94,8 +94,12 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans overflow-x-hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -109,22 +113,32 @@
 
 @layer components {
   .divine-card {
-    @apply bg-white/90 dark:bg-divine-blue/40 rounded-2xl shadow-md border border-divine-lightGold/30 dark:border-divine-gold/20 backdrop-blur-sm p-6;
+    @apply bg-white/90 dark:bg-divine-blue/40 rounded-xl sm:rounded-2xl shadow-md border border-divine-lightGold/30 dark:border-divine-gold/20 backdrop-blur-sm p-4 sm:p-6;
   }
   
   .divine-button {
-    @apply bg-divine-saffron hover:bg-divine-saffron/90 text-white font-medium rounded-full px-6 py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow;
+    @apply bg-divine-saffron hover:bg-divine-saffron/90 text-white font-medium rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow;
   }
   
   .divine-button-secondary {
-    @apply bg-divine-cream hover:bg-divine-cream/90 dark:bg-divine-blue/60 dark:hover:bg-divine-blue/80 text-divine-blue dark:text-white font-medium rounded-full px-6 py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow border border-divine-lightGold/50 dark:border-divine-gold/20;
+    @apply bg-divine-cream hover:bg-divine-cream/90 dark:bg-divine-blue/60 dark:hover:bg-divine-blue/80 text-divine-blue dark:text-white font-medium rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow border border-divine-lightGold/50 dark:border-divine-gold/20;
   }
   
   .nav-item {
-    @apply flex flex-col items-center justify-center p-2 rounded-lg transition-all;
+    @apply flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-lg transition-all;
   }
   
   .nav-item.active {
     @apply text-divine-saffron;
+  }
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
