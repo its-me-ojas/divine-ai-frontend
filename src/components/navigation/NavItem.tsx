@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { LucideIcon } from "lucide-react";
 
 interface NavItemProps {
   to: string;

@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/hooks/useTheme";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -10,7 +9,6 @@ interface SplashScreenProps {
 const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [isAnimating, setIsAnimating] = useState(true);
   const [shouldShowSplash, setShouldShowSplash] = useState(true);
-  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     // Check if the splash screen has been shown in this session
@@ -44,9 +42,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     <AnimatePresence>
       {isAnimating && (
         <motion.div
-          className={`fixed inset-0 flex items-center justify-center z-50 ${
-            isDarkMode ? "bg-divine-blue" : "bg-divine-cream"
-          }`}
+          className="fixed inset-0 flex items-center justify-center bg-divine-blue z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -77,14 +73,10 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                   ease: "easeInOut",
                 }
               }}
-              className={`w-24 h-24 rounded-full ${
-                isDarkMode ? "bg-divine-gold/20" : "bg-divine-saffron/20"
-              } flex items-center justify-center will-change-transform`}
+              className="w-24 h-24 rounded-full bg-divine-gold/20 flex items-center justify-center will-change-transform"
             >
               <motion.div 
-                className={`w-20 h-20 rounded-full ${
-                  isDarkMode ? "bg-divine-saffron" : "bg-divine-gold"
-                } flex items-center justify-center will-change-transform`}
+                className="w-20 h-20 rounded-full bg-divine-saffron flex items-center justify-center will-change-transform"
                 animate={{ 
                   scale: [1, 1.05, 1],
                 }}
@@ -94,9 +86,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                   ease: "easeInOut"
                 }}
               >
-                <span className={`text-4xl font-mukti ${
-                  isDarkMode ? "text-white" : "text-divine-blue"
-                }`}>ॐ</span>
+                <span className="text-white text-4xl font-mukti">ॐ</span>
               </motion.div>
             </motion.div>
 
@@ -104,9 +94,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className={`text-3xl font-mukti font-bold ${
-                isDarkMode ? "text-white" : "text-divine-blue"
-              }`}
+              className="text-3xl font-mukti font-bold text-white"
             >
               Divine AI
             </motion.h1>
@@ -115,9 +103,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-              className={`text-lg font-serif ${
-                isDarkMode ? "text-white/80" : "text-divine-blue/80"
-              }`}
+              className="text-lg text-white/80 font-serif"
             >
               Your Personal Guide to Spiritual Wisdom
             </motion.p>

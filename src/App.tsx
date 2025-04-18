@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 import WisdomPage from "./pages/WisdomPage";
 import WisdomArticlePage from "./pages/WisdomArticlePage";
 
-// Scroll restoration component - ensures we always start at the top of new pages
+// Scroll restoration component
 function ScrollToTop() {
   const { pathname } = useLocation();
   

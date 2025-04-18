@@ -26,7 +26,7 @@ const Index = () => {
     verse: 47
   };
 
-  // Function to scroll to daily verse - showing it first on load
+  // Function to scroll to daily verse
   const scrollToDailyVerse = () => {
     if (dailyVerseRef.current) {
       dailyVerseRef.current.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
@@ -48,11 +48,16 @@ const Index = () => {
   // Check if user is coming back to home page
   useEffect(() => {
     if (location.pathname === "/" && !showSplash) {
-      // Always scroll to top/daily verse when navigating back to home
-      window.scrollTo(0, 0);
+      // If animation has been shown already
+      const hasShownHomeAnimation = localStorage.getItem("homeAnimationShown") === "true";
       
-      // Mark home animation as shown
-      localStorage.setItem("homeAnimationShown", "true");
+      if (hasShownHomeAnimation) {
+        // Small delay to ensure components are rendered
+        setTimeout(scrollToDailyVerse, 100);
+      } else {
+        // Mark home animation as shown
+        localStorage.setItem("homeAnimationShown", "true");
+      }
     }
   }, [location.pathname, showSplash]);
 
@@ -77,7 +82,7 @@ const Index = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="mt-3 sm:mt-4" // Reduced spacing for mobile
+                  className="mt-4 sm:mt-6"
                 >
                   <ChatInterface />
                 </motion.div>
@@ -90,7 +95,7 @@ const Index = () => {
       </div>
       
       {/* Floating chat button */}
-      {!showSplash && !showChat && <FloatingChatButton onClick={scrollToChat} />}
+      {!showSplash && <FloatingChatButton onClick={scrollToChat} />}
     </>
   );
 };

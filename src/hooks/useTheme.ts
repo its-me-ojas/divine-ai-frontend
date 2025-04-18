@@ -18,7 +18,6 @@ export const useTheme = () => {
         document.documentElement.classList.remove("dark");
       }
     } else {
-      // Default to light mode
       setIsDarkMode(false);
       document.documentElement.classList.remove("dark");
       localStorage.setItem("darkMode", "false");
