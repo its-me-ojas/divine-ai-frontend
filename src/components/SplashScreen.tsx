@@ -12,21 +12,21 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
   useEffect(() => {
     // Check if the splash screen has been shown in this session
-    const splashShown = localStorage.getItem("splashScreenShown");
+    const splashShown = sessionStorage.getItem("splashScreenShown");
     
     if (splashShown === "true") {
-      // If already shown, skip the splash screen
+      // If already shown in this session, skip the splash screen
       setShouldShowSplash(false);
       onComplete();
       return;
     }
 
-    // Animation timing as specified: 2s for display + 0.75s for fade out
+    // Animation timing: 2s for display + 0.75s for fade out
     const timer = setTimeout(() => {
       setIsAnimating(false);
       const fadeOutTimer = setTimeout(() => {
-        // Set the flag in localStorage
-        localStorage.setItem("splashScreenShown", "true");
+        // Set the flag in sessionStorage (not localStorage, to persist only for this session)
+        sessionStorage.setItem("splashScreenShown", "true");
         onComplete();
       }, 750); // 0.75s for fade out
       return () => clearTimeout(fadeOutTimer);
@@ -42,41 +42,68 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     <AnimatePresence>
       {isAnimating && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center bg-divine-cream dark:bg-divine-blue z-50"
+          className="fixed inset-0 flex items-center justify-center bg-divine-blue z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ 
-            duration: isAnimating ? 1.5 : 0.75, 
+            duration: isAnimating ? 0.8 : 0.5, 
             ease: "easeInOut" 
           }}
         >
           <div className="flex flex-col items-center justify-center space-y-6 p-6 text-center">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-              className="w-24 h-24 rounded-full bg-divine-gold/20 flex items-center justify-center"
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                boxShadow: [
+                  "0 0 0 rgba(255, 153, 51, 0)",
+                  "0 0 20px rgba(255, 153, 51, 0.5)",
+                  "0 0 40px rgba(255, 153, 51, 0.3)",
+                  "0 0 20px rgba(255, 153, 51, 0.5)",
+                  "0 0 0 rgba(255, 153, 51, 0)"
+                ]
+              }}
+              transition={{ 
+                duration: 2,
+                boxShadow: {
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                }
+              }}
+              className="w-24 h-24 rounded-full bg-divine-gold/20 flex items-center justify-center will-change-transform"
             >
-              <div className="w-20 h-20 rounded-full bg-divine-saffron flex items-center justify-center">
+              <motion.div 
+                className="w-20 h-20 rounded-full bg-divine-saffron flex items-center justify-center will-change-transform"
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
                 <span className="text-white text-4xl font-mukti">ॐ</span>
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-              className="text-3xl font-mukti font-bold text-divine-blue dark:text-white"
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="text-3xl font-mukti font-bold text-white"
             >
-              Welcome to Divine AI
+              Divine AI
             </motion.h1>
 
             <motion.p
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
-              className="text-lg text-divine-blue/80 dark:text-white/80 font-serif"
+              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+              className="text-lg text-white/80 font-serif"
             >
               Your Personal Guide to Spiritual Wisdom
             </motion.p>

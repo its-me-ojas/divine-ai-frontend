@@ -7,7 +7,7 @@ import ChatInterface from "../components/ChatInterface";
 import Navigation from "../components/Navigation";
 import FloatingChatButton from "../components/FloatingChatButton";
 import { useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -15,6 +15,7 @@ const Index = () => {
   const dailyVerseRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const prefersReducedMotion = useReducedMotion();
   
   // Daily verse data
   const dailyVerse = {
@@ -28,7 +29,7 @@ const Index = () => {
   // Function to scroll to daily verse
   const scrollToDailyVerse = () => {
     if (dailyVerseRef.current) {
-      dailyVerseRef.current.scrollIntoView({ behavior: 'smooth' });
+      dailyVerseRef.current.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     }
   };
 
@@ -39,7 +40,7 @@ const Index = () => {
     // Small delay to ensure chat is rendered before scrolling
     setTimeout(() => {
       if (chatRef.current) {
-        chatRef.current.scrollIntoView({ behavior: 'smooth' });
+        chatRef.current.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
       }
     }, 100);
   };
@@ -47,12 +48,12 @@ const Index = () => {
   // Check if user is coming back to home page
   useEffect(() => {
     if (location.pathname === "/" && !showSplash) {
-      // If animation has been shown already, automatically scroll to daily verse
+      // If animation has been shown already
       const hasShownHomeAnimation = localStorage.getItem("homeAnimationShown") === "true";
       
       if (hasShownHomeAnimation) {
         // Small delay to ensure components are rendered
-        setTimeout(scrollToDailyVerse, 300);
+        setTimeout(scrollToDailyVerse, 100);
       } else {
         // Mark home animation as shown
         localStorage.setItem("homeAnimationShown", "true");
@@ -64,24 +65,24 @@ const Index = () => {
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       
-      <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-20">
-        <div className="container max-w-xl mx-auto px-4">
+      <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-16">
+        <div className="container max-w-xl mx-auto px-3 sm:px-4">
           <Header />
           
-          <main className="py-4">
+          <main className="py-3 sm:py-4">
             <div ref={dailyVerseRef}>
               <DailyVerse verse={dailyVerse} />
             </div>
             
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {showChat && (
                 <motion.div 
                   ref={chatRef}
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="mt-8"
+                  transition={{ duration: 0.3 }}
+                  className="mt-4 sm:mt-6"
                 >
                   <ChatInterface />
                 </motion.div>

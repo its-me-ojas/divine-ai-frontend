@@ -1,11 +1,19 @@
 
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bookmark, Play } from "lucide-react";
+import { useEffect } from "react";
 
 const VersesPage = () => {
+  const prefersReducedMotion = useReducedMotion();
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Sample verses data
   const verses = [
     {
@@ -35,48 +43,68 @@ const VersesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-20">
-      <div className="container max-w-xl mx-auto px-4">
+    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-16">
+      <div className="container max-w-xl mx-auto px-3 sm:px-4">
         <Header />
         
-        <main className="py-4">
-          <h1 className="text-2xl font-mukti font-bold mb-6">Sacred Verses</h1>
+        <main className="py-3 sm:py-4">
+          <h1 className="text-xl sm:text-2xl font-mukti font-bold mb-4 sm:mb-6">Sacred Verses</h1>
           
-          <Tabs defaultValue="all" className="w-full mb-6">
-            <TabsList className="grid grid-cols-4 mb-6 bg-divine-cream/80 dark:bg-divine-blue/80">
+          <Tabs defaultValue="all" className="w-full mb-4 sm:mb-6">
+            <TabsList className="grid grid-cols-4 mb-4 sm:mb-6 bg-divine-cream/80 dark:bg-divine-blue/80">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="karma">Karma</TabsTrigger>
               <TabsTrigger value="yoga">Yoga</TabsTrigger>
               <TabsTrigger value="dharma">Dharma</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="all" className="space-y-6">
-              {verses.map((verse) => (
-                <VerseCard key={verse.id} verse={verse} />
+            <TabsContent value="all" className="space-y-4 sm:space-y-6">
+              {verses.map((verse, index) => (
+                <VerseCard 
+                  key={verse.id} 
+                  verse={verse}
+                  index={index}
+                  prefersReducedMotion={prefersReducedMotion} 
+                />
               ))}
             </TabsContent>
             
-            <TabsContent value="karma" className="space-y-6">
+            <TabsContent value="karma" className="space-y-4 sm:space-y-6">
               {verses
                 .filter((verse) => verse.category === "karma")
-                .map((verse) => (
-                  <VerseCard key={verse.id} verse={verse} />
+                .map((verse, index) => (
+                  <VerseCard 
+                    key={verse.id} 
+                    verse={verse} 
+                    index={index}
+                    prefersReducedMotion={prefersReducedMotion}
+                  />
                 ))}
             </TabsContent>
             
-            <TabsContent value="yoga" className="space-y-6">
+            <TabsContent value="yoga" className="space-y-4 sm:space-y-6">
               {verses
                 .filter((verse) => verse.category === "yoga")
-                .map((verse) => (
-                  <VerseCard key={verse.id} verse={verse} />
+                .map((verse, index) => (
+                  <VerseCard 
+                    key={verse.id} 
+                    verse={verse} 
+                    index={index}
+                    prefersReducedMotion={prefersReducedMotion}
+                  />
                 ))}
             </TabsContent>
             
-            <TabsContent value="dharma" className="space-y-6">
+            <TabsContent value="dharma" className="space-y-4 sm:space-y-6">
               {verses
                 .filter((verse) => verse.category === "dharma")
-                .map((verse) => (
-                  <VerseCard key={verse.id} verse={verse} />
+                .map((verse, index) => (
+                  <VerseCard 
+                    key={verse.id} 
+                    verse={verse} 
+                    index={index}
+                    prefersReducedMotion={prefersReducedMotion}
+                  />
                 ))}
             </TabsContent>
           </Tabs>
@@ -97,19 +125,25 @@ interface VerseCardProps {
     verse: number;
     category: string;
   };
+  index: number;
+  prefersReducedMotion: boolean;
 }
 
-const VerseCard = ({ verse }: VerseCardProps) => {
+const VerseCard = ({ verse, index, prefersReducedMotion }: VerseCardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="divine-card"
+      transition={{ 
+        duration: 0.4, 
+        delay: prefersReducedMotion ? 0 : index * 0.1,
+        ease: "easeOut"
+      }}
+      className="divine-card will-change-transform"
     >
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         <div className="flex justify-between items-start">
-          <span className="text-sm text-divine-blue/60 dark:text-white/60">
+          <span className="text-xs sm:text-sm text-divine-blue/60 dark:text-white/60">
             Chapter {verse.chapter}, Verse {verse.verse}
           </span>
           <span className="text-xs bg-divine-saffron/20 text-divine-saffron dark:text-divine-gold px-2 py-1 rounded-full capitalize">
@@ -117,22 +151,22 @@ const VerseCard = ({ verse }: VerseCardProps) => {
           </span>
         </div>
         
-        <p className="text-sm font-serif italic text-divine-blue dark:text-divine-cream">
+        <p className="text-xs sm:text-sm font-serif italic text-divine-blue dark:text-divine-cream">
           {verse.sanskrit}
         </p>
         
-        <p className="text-base font-serif text-divine-blue/90 dark:text-white/90">
+        <p className="text-sm sm:text-base font-serif text-divine-blue/90 dark:text-white/90">
           {verse.translation}
         </p>
         
         <div className="flex justify-between pt-2">
-          <button className="divine-button-secondary">
-            <Play size={16} />
+          <button className="divine-button-secondary text-xs sm:text-sm">
+            <Play size={14} className="sm:w-4 sm:h-4" />
             <span>Listen</span>
           </button>
           
-          <button className="divine-button-secondary">
-            <Bookmark size={16} />
+          <button className="divine-button-secondary text-xs sm:text-sm">
+            <Bookmark size={14} className="sm:w-4 sm:h-4" />
             <span>Save</span>
           </button>
         </div>
