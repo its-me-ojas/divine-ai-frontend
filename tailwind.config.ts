@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for our theme
+				hindu: {
+					accent: '#FF7F32',
+					accent2: '#FFA500',
+					dark: '#121212',
+					darkSecondary: '#1c1c1c',
+					text: '#f0f0f0',
+					headings: '#d1d1d1'
 				}
 			},
 			borderRadius: {
