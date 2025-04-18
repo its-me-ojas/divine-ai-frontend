@@ -1,4 +1,3 @@
-
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { motion } from "framer-motion";
@@ -7,8 +6,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Edit, User, Save } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
 
 const ProfilePage = () => {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   // Staggered animation for containers
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,7 +36,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-20">
+    <div className="min-h-screen bg-divine-cream/50 dark:bg-[#121212] text-divine-blue dark:text-white pb-20">
       <div className="container max-w-xl mx-auto px-4">
         <Header />
         
@@ -54,7 +55,7 @@ const ProfilePage = () => {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="divine-card mb-6"
+            className="divine-card mb-6 dark:bg-[#1E1E1E] dark:border-divine-gold/10"
           >
             <div className="flex flex-col items-center text-center space-y-4">
               <motion.div 
@@ -68,8 +69,8 @@ const ProfilePage = () => {
                   stiffness: 200
                 }}
               >
-                <div className="w-24 h-24 rounded-full bg-divine-cream dark:bg-divine-blue flex items-center justify-center shadow-md border-2 border-divine-lightGold/30 dark:border-divine-gold/20">
-                  <User size={40} className="text-divine-blue/70 dark:text-white/70" />
+                <div className="w-24 h-24 rounded-full bg-divine-cream dark:bg-[#2A2A2A] flex items-center justify-center shadow-md border-2 border-divine-lightGold/30 dark:border-divine-gold/10">
+                  <User size={40} className="text-divine-blue/70 dark:text-white/50" />
                 </div>
                 <motion.button 
                   className="absolute bottom-0 right-0 w-8 h-8 bg-divine-saffron rounded-full flex items-center justify-center shadow-sm"
@@ -83,7 +84,7 @@ const ProfilePage = () => {
               
               <motion.div variants={childVariants}>
                 <h2 className="text-xl font-mukti font-semibold">Namaste, Seeker</h2>
-                <p className="text-sm text-divine-blue/70 dark:text-white/70">Joined April 2023</p>
+                <p className="text-sm text-divine-blue/70 dark:text-white/50">Joined April 2023</p>
               </motion.div>
             </div>
           </motion.div>
@@ -93,7 +94,7 @@ const ProfilePage = () => {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="divine-card mb-6 space-y-4"
+            className="divine-card mb-6 space-y-4 dark:bg-[#1E1E1E] dark:border-divine-gold/10"
           >
             <motion.h2 variants={childVariants} className="text-xl font-mukti font-semibold">
               Personal Information
@@ -101,12 +102,12 @@ const ProfilePage = () => {
             
             <motion.div variants={childVariants} className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" value="Seeker" className="bg-white/80 dark:bg-divine-blue/40 border-divine-lightGold/30 dark:border-divine-gold/20" />
+              <Input id="name" value="Seeker" className="bg-white/80 dark:bg-[#2A2A2A] border-divine-lightGold/30 dark:border-divine-gold/10" />
             </motion.div>
             
             <motion.div variants={childVariants} className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" value="seeker@example.com" className="bg-white/80 dark:bg-divine-blue/40 border-divine-lightGold/30 dark:border-divine-gold/20" />
+              <Input id="email" value="seeker@example.com" className="bg-white/80 dark:bg-[#2A2A2A] border-divine-lightGold/30 dark:border-divine-gold/10" />
             </motion.div>
             
             <motion.div variants={childVariants}>
@@ -128,7 +129,7 @@ const ProfilePage = () => {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="divine-card space-y-4"
+            className="divine-card space-y-4 dark:bg-[#1E1E1E] dark:border-divine-gold/10"
           >
             <motion.h2 variants={childVariants} className="text-xl font-mukti font-semibold">
               App Settings
@@ -137,7 +138,7 @@ const ProfilePage = () => {
             {[
               { id: "notifications", label: "Daily Verse Notification", defaultChecked: true },
               { id: "sound", label: "Sound Effects", defaultChecked: true },
-              { id: "theme", label: "Dark Theme", defaultChecked: false }
+              { id: "theme", label: "Dark Theme", checked: isDarkMode, onChange: toggleDarkMode }
             ].map((setting, index) => (
               <motion.div 
                 key={setting.id}
@@ -148,14 +149,15 @@ const ProfilePage = () => {
                 <Label htmlFor={setting.id}>{setting.label}</Label>
                 <Switch 
                   id={setting.id} 
-                  defaultChecked={setting.defaultChecked} 
+                  checked={setting.checked}
+                  onCheckedChange={setting.onChange}
                 />
               </motion.div>
             ))}
             
             <motion.div 
               variants={childVariants}
-              className="border-t border-divine-lightGold/30 dark:border-divine-gold/20 pt-4 mt-2"
+              className="border-t border-divine-lightGold/30 dark:border-divine-gold/10 pt-4 mt-2"
             >
               <motion.div
                 whileHover={{ scale: 1.03 }}

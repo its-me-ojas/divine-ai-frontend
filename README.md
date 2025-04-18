@@ -1,73 +1,55 @@
-# Welcome to your Lovable project
+# Divine AI - Your Personal Guide to Hindu Wisdom
 
-## Project info
+Divine AI is a modern web application that provides personalized spiritual guidance through ancient Hindu texts. The app offers daily verses, wisdom articles, and spiritual practices to help users connect with timeless Hindu wisdom in their daily lives.
 
-**URL**: https://lovable.dev/projects/9c6c73e6-1892-4d73-9a6f-128f485df23d
+## Features
 
-## How can I edit this code?
+- Daily verses from the Bhagavad Gita and other sacred texts
+- Personalized spiritual guidance
+- Dark/Light mode for comfortable reading
+- Wisdom articles on various spiritual topics
+- Bookmark favorite verses
+- Track spiritual practice streaks
+- Modern, responsive UI
 
-There are several ways of editing your application.
+## Technologies Used
 
-**Use Lovable**
+This project is built with:
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9c6c73e6-1892-4d73-9a6f-128f485df23d) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Development Setup
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
-
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone <repository-url>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd divine-ai
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Building for Production
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+# Create a production build
+npm run build
 
-**Use GitHub Codespaces**
+# Preview the production build locally
+npm run preview
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Contributing
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/9c6c73e6-1892-4d73-9a6f-128f485df23d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Contributions are welcome! Please feel free to submit a Pull Request.
