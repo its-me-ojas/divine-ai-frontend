@@ -1,4 +1,3 @@
-
 import { Home, BookOpen, Award, Bookmark, Menu, BookText } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -30,13 +29,10 @@ const Navigation = () => {
         document.documentElement.classList.remove("dark");
       }
     } else {
-      // Check system preference if no local storage preference exists
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setIsDarkMode(prefersDark);
-      
-      if (prefersDark) {
-        document.documentElement.classList.add("dark");
-      }
+      // Default to light mode if no preference is set
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("darkMode", "false");
     }
   }, []);
 
@@ -72,7 +68,7 @@ const Navigation = () => {
   return (
     <>
       {/* Mobile Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-divine-blue border-t border-divine-lightGold/30 dark:border-divine-gold/20 flex items-center justify-around z-10">
+      <div className="fixed bottom-0 left-0 right-0 h-16 bg-background/80 dark:bg-background/80 border-t border-border backdrop-blur-lg flex items-center justify-around z-10">
         <NavItem 
           to="/"
           isActive={location.pathname === "/"} 
@@ -144,7 +140,7 @@ const Navigation = () => {
             </SheetTrigger>
             <SheetContent 
               side="right" 
-              className="bg-divine-cream/95 dark:bg-divine-blue border-divine-lightGold/30 dark:border-divine-gold/20"
+              className="bg-background/95 dark:bg-background/95 border-border backdrop-blur-xl"
             >
               <AnimatePresence>
                 {isSheetOpen && (
@@ -241,7 +237,6 @@ const Navigation = () => {
   );
 };
 
-// Extracted NavItem component to reduce redundancy
 interface NavItemProps {
   to: string;
   isActive: boolean;
