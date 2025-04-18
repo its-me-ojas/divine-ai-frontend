@@ -1,0 +1,80 @@
+{
+  "common": {
+    "home": "Home",
+    "askAI": "Ask AI",
+    "verses": "Verses",
+    "wisdom": "Wisdom",
+    "saved": "Saved",
+    "profile": "Profile",
+    "streaks": "Streaks",
+    "settings": "Settings",
+    "darkMode": "Dark Mode",
+    "notifications": "Notifications",
+    "selectLanguage": "Select Language",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "readMore": "Read More",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "error": "Error",
+    "success": "Success",
+    "loading": "Loading...",
+    "noResults": "No results found"
+  },
+  "chat": {
+    "greeting": "Namaste!",
+    "welcomeMessage": "Ask me anything about Hindu wisdom and spirituality.",
+    "description": "I'm here to guide you with insights from the Bhagavad Gita and other sacred texts.",
+    "placeholder": "Ask about Hindu wisdom..."
+  },
+  "verses": {
+    "title": "Sacred Verses",
+    "categories": {
+      "all": "All",
+      "karma": "Karma",
+      "yoga": "Yoga",
+      "bhakti": "Devotion",
+      "dharma": "Dharma",
+      "peace": "Peace",
+      "wisdom": "Wisdom"
+    },
+    "chapterVerse": "Chapter {{chapter}}, Verse {{verse}}",
+    "search": "Search verses...",
+    "bookmark": "Bookmark",
+    "unbookmark": "Remove bookmark",
+    "share": "Share verse"
+  },
+  "wisdom": {
+    "title": "Divine Wisdom",
+    "subtitle": "Ancient wisdom for modern life. Explore spiritual insights from sacred texts to find clarity, purpose, and inner peace.",
+    "readArticle": "Read Article",
+    "relatedArticles": "Continue Your Spiritual Journey",
+    "personalizedWisdom": "Want personalized divine wisdom?",
+    "tryNow": "Try Divine AI Now"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "name": "Name",
+    "email": "Email",
+    "language": "Language",
+    "preferences": "Preferences",
+    "account": "Account Settings",
+    "notifications": "Notification Settings",
+    "privacy": "Privacy Settings"
+  },
+  "streaks": {
+    "title": "Your Streaks",
+    "currentStreak": "Current Streak",
+    "longestStreak": "Longest Streak",
+    "days": "days",
+    "achievements": "Achievements",
+    "firstStep": "First Step",
+    "seeker": "Seeker",
+    "devoted": "Devoted",
+    "scholar": "Scholar"
+  }
+} 

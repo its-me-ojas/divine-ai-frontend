@@ -1,46 +1,43 @@
-
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface NavItemProps {
   to: string;
-  isActive: boolean;
-  index: number;
-  variants: {
-    initial: any;
-    animate: (i: number) => any;
-    tap: any;
-  };
   icon: React.ReactNode;
   label: string;
-  prefersReducedMotion: boolean | null;
+  isActive: boolean;
+  variants: {
+    initial: { opacity: number; y?: number };
+    animate: (i: number) => { y: number; opacity: number; transition: any };
+    tap: { scale?: number };
+  };
+  custom?: number;
 }
 
-export const NavItem = ({ 
-  to, 
-  isActive, 
-  index, 
-  variants, 
-  icon, 
-  label,
-  prefersReducedMotion 
-}: NavItemProps) => (
-  <motion.div
-    custom={index}
-    initial="initial"
-    animate="animate"
-    variants={variants}
-    whileTap="tap"
-  >
-    <Link to={to} className={`nav-item ${isActive ? "active" : ""}`}>
-      <motion.div 
-        whileHover={prefersReducedMotion ? {} : { y: -3 }} 
-        transition={{ type: "spring", stiffness: 300 }}
+const NavItem = ({ to, icon, label, isActive, variants, custom }: NavItemProps) => {
+  return (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      variants={variants}
+      custom={custom}
+      whileTap="tap"
+    >
+      <Link
+        to={to}
+        className={cn(
+          "flex flex-col items-center justify-center gap-1 p-2 rounded-lg transition-colors",
+          isActive
+            ? "text-primary"
+            : "text-muted-foreground hover:text-foreground"
+        )}
       >
         {icon}
-        <span className="text-xs mt-1">{label}</span>
-      </motion.div>
-    </Link>
-  </motion.div>
-);
+        <span className="text-xs">{label}</span>
+      </Link>
+    </motion.div>
+  );
+};
+
+export default NavItem;

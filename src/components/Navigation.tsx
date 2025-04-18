@@ -1,17 +1,18 @@
-
-import { Home, BookOpen, Award, Bookmark, BookText } from "lucide-react";
+import { Home, BookOpen, Award, Bookmark, BookText, MessageCircle } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import { NavItem } from "./navigation/NavItem";
-import { MenuSheet } from "./navigation/MenuSheet";
+import NavItem from "./navigation/NavItem";
+import MenuSheet from "./navigation/MenuSheet";
 import { useTheme } from "@/hooks/useTheme";
+import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
   const location = useLocation();
   const { isDarkMode, toggleDarkMode } = useTheme();
   const [showNotifications, setShowNotifications] = useState(true);
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation();
 
   const navItemVariants = {
     initial: prefersReducedMotion ? { opacity: 0.9 } : { y: 10, opacity: 0 },
@@ -28,25 +29,24 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { to: "/", icon: <Home size={20} />, label: "Home" },
-    { to: "/verses", icon: <BookOpen size={20} />, label: "Verses" },
-    { to: "/wisdom", icon: <BookText size={20} />, label: "Wisdom" },
-    { to: "/streaks", icon: <Award size={20} />, label: "Streaks" },
-    { to: "/bookmarks", icon: <Bookmark size={20} />, label: "Saved" },
+    { to: "/", icon: <Home size={20} />, label: t("common.home") },
+    { to: "/chat", icon: <MessageCircle size={20} />, label: t("common.askAI") },
+    { to: "/verses", icon: <BookOpen size={20} />, label: t("common.verses") },
+    { to: "/wisdom", icon: <BookText size={20} />, label: t("common.wisdom") },
+    { to: "/bookmarks", icon: <Bookmark size={20} />, label: t("common.saved") },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-16 bg-background/80 dark:bg-background/80 border-t border-border backdrop-blur-lg flex items-center justify-around z-10">
+    <div className="fixed bottom-0 left-0 right-0 h-16 bg-background/95 dark:bg-background/95 border-t border-border backdrop-blur-xl flex items-center justify-around z-10">
       {navItems.map((item, index) => (
         <NavItem
           key={item.to}
           to={item.to}
-          isActive={item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to)}
-          index={index}
-          variants={navItemVariants}
           icon={item.icon}
           label={item.label}
-          prefersReducedMotion={prefersReducedMotion}
+          isActive={item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to)}
+          variants={navItemVariants}
+          custom={index}
         />
       ))}
       

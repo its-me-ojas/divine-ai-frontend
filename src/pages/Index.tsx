@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import SplashScreen from "../components/SplashScreen";
 import Header from "../components/Header";
 import DailyVerse from "../components/DailyVerse";
-import ChatInterface from "../components/ChatInterface";
+// import ChatInterface from "../components/ChatInterface";
 import Navigation from "../components/Navigation";
-import FloatingChatButton from "../components/FloatingChatButton";
+// import FloatingChatButton from "../components/FloatingChatButton";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
-  const [showChat, setShowChat] = useState(false);
+  // const [showChat, setShowChat] = useState(false);
   const dailyVerseRef = useRef<HTMLDivElement>(null);
-  const chatRef = useRef<HTMLDivElement>(null);
+  // const chatRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
   
@@ -32,8 +32,8 @@ const Index = () => {
     }
   };
 
-  // Function to scroll to chat
-  const scrollToChat = () => {
+  // Function to scroll to chat (commented out)
+  /* const scrollToChat = () => {
     setShowChat(true);
     
     // Small delay to ensure chat is rendered before scrolling
@@ -42,7 +42,7 @@ const Index = () => {
         chatRef.current.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
       }
     }, 100);
-  };
+  }; */
 
   // Check if user is coming back to home page
   useEffect(() => {
@@ -73,6 +73,7 @@ const Index = () => {
               <DailyVerse verse={dailyVerse} />
             </div>
             
+            {/* Chat Interface (commented out)
             <AnimatePresence mode="wait">
               {showChat && (
                 <motion.div 
@@ -87,14 +88,16 @@ const Index = () => {
                 </motion.div>
               )}
             </AnimatePresence>
+            */}
           </main>
           
           <Navigation />
         </div>
       </div>
       
-      {/* Floating chat button */}
+      {/* Floating chat button (commented out)
       {!showSplash && <FloatingChatButton onClick={scrollToChat} />}
+      */}
     </>
   );
 };

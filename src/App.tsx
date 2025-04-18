@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,9 @@ import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
 import WisdomPage from "./pages/WisdomPage";
 import WisdomArticlePage from "./pages/WisdomArticlePage";
+import ChatPage from "./pages/ChatPage";
+import ErrorBoundary from "./components/ErrorBoundary";
+import "./i18n/config";
 
 // Scroll restoration component
 function ScrollToTop() {
@@ -28,28 +30,33 @@ function ScrollToTop() {
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/verses" element={<VersesPage />} />
-            <Route path="/streaks" element={<StreaksPage />} />
-            <Route path="/bookmarks" element={<BookmarksPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/wisdom" element={<WisdomPage />} />
-            <Route path="/wisdom/:slug" element={<WisdomArticlePage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+function App() {
+  return (
+    <ErrorBoundary>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/chat" element={<ChatPage />} />
+                <Route path="/verses" element={<VersesPage />} />
+                <Route path="/wisdom" element={<WisdomPage />} />
+                <Route path="/wisdom/:slug" element={<WisdomArticlePage />} />
+                <Route path="/bookmarks" element={<BookmarksPage />} />
+                <Route path="/streaks" element={<StreaksPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+            <Toaster />
+            <Sonner />
+          </TooltipProvider>
+        </QueryClientProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
+  );
+}
 
 export default App;

@@ -3,9 +3,17 @@ import Navigation from "../components/Navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bookmark, Play } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Share2 } from "lucide-react";
 
 const VersesPage = () => {
+  const { t } = useTranslation();
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const prefersReducedMotion = useReducedMotion();
   
   // Scroll to top when component mounts
@@ -41,136 +49,92 @@ const VersesPage = () => {
     }
   ];
 
+  const categories = [
+    { id: "all", label: t("verses.categories.all") },
+    { id: "karma", label: t("verses.categories.karma") },
+    { id: "yoga", label: t("verses.categories.yoga") },
+    { id: "bhakti", label: t("verses.categories.bhakti") },
+    { id: "dharma", label: t("verses.categories.dharma") },
+    { id: "peace", label: t("verses.categories.peace") },
+    { id: "wisdom", label: t("verses.categories.wisdom") }
+  ];
+
   return (
-    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-16">
-      <div className="container max-w-xl mx-auto px-3 sm:px-4">
+    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-20">
+      <div className="container max-w-xl mx-auto px-4">
         <Header />
         
-        <main className="py-3 sm:py-4">
-          <h1 className="text-xl sm:text-2xl font-mukti font-bold mb-4 sm:mb-6">Sacred Verses</h1>
-          
-          <Tabs defaultValue="all" className="w-full mb-4 sm:mb-6">
-            <TabsList className="grid grid-cols-4 mb-4 sm:mb-6 bg-divine-cream/80 dark:bg-divine-dark/80">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="karma">Karma</TabsTrigger>
-              <TabsTrigger value="yoga">Yoga</TabsTrigger>
-              <TabsTrigger value="dharma">Dharma</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="all" className="space-y-4 sm:space-y-6">
-              {verses.map((verse, index) => (
-                <VerseCard 
-                  key={verse.id} 
-                  verse={verse}
-                  index={index}
-                  prefersReducedMotion={prefersReducedMotion} 
-                />
-              ))}
-            </TabsContent>
-            
-            <TabsContent value="karma" className="space-y-4 sm:space-y-6">
-              {verses
-                .filter((verse) => verse.category === "karma")
-                .map((verse, index) => (
-                  <VerseCard 
-                    key={verse.id} 
-                    verse={verse} 
-                    index={index}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-            </TabsContent>
-            
-            <TabsContent value="yoga" className="space-y-4 sm:space-y-6">
-              {verses
-                .filter((verse) => verse.category === "yoga")
-                .map((verse, index) => (
-                  <VerseCard 
-                    key={verse.id} 
-                    verse={verse} 
-                    index={index}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-            </TabsContent>
-            
-            <TabsContent value="dharma" className="space-y-4 sm:space-y-6">
-              {verses
-                .filter((verse) => verse.category === "dharma")
-                .map((verse, index) => (
-                  <VerseCard 
-                    key={verse.id} 
-                    verse={verse} 
-                    index={index}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-            </TabsContent>
-          </Tabs>
+        <main className="py-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-2xl font-mukti font-bold mb-6"
+          >
+            {t("verses.title")}
+          </motion.h1>
+
+          <div className="flex gap-2 overflow-x-auto pb-2 mb-4 scrollbar-hide">
+            {categories.map((category) => (
+              <Button
+                key={category.id}
+                variant={selectedCategory === category.id ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category.id)}
+                className={cn(
+                  "whitespace-nowrap",
+                  selectedCategory === category.id
+                    ? "bg-divine-saffron hover:bg-divine-saffron/90 text-white"
+                    : "hover:bg-divine-cream dark:hover:bg-divine-dark/50"
+                )}
+              >
+                {category.label}
+              </Button>
+            ))}
+          </div>
+
+          {/* Verse cards */}
+          <div className="space-y-4">
+            {verses.map((verse) => (
+              <motion.div
+                key={verse.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className="divine-card">
+                  <CardHeader>
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="text-xs font-medium text-divine-saffron">
+                        {t("verses.chapterVerse", { chapter: verse.chapter, verse: verse.verse })}
+                      </div>
+                      <Badge variant="outline" className="bg-divine-saffron/10">
+                        {t(`verses.categories.${verse.category}`)}
+                      </Badge>
+                    </div>
+                    <div className="space-y-4">
+                      <p className="font-mukti text-lg">{verse.sanskrit}</p>
+                      <p className="text-divine-blue/80 dark:text-white/80">{verse.translation}</p>
+                    </div>
+                  </CardHeader>
+                  <CardFooter className="flex justify-between">
+                    <Button variant="ghost" size="sm" className="text-divine-blue/70 dark:text-white/70">
+                      <Share2 size={16} className="mr-1" />
+                      {t("verses.share")}
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-divine-blue/70 dark:text-white/70">
+                      <Bookmark size={16} className="mr-1" />
+                      {t("verses.bookmark")}
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </main>
-        
+
         <Navigation />
       </div>
     </div>
-  );
-};
-
-interface VerseCardProps {
-  verse: {
-    id: number;
-    sanskrit: string;
-    translation: string;
-    chapter: number;
-    verse: number;
-    category: string;
-  };
-  index: number;
-  prefersReducedMotion: boolean;
-}
-
-const VerseCard = ({ verse, index, prefersReducedMotion }: VerseCardProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.4, 
-        delay: prefersReducedMotion ? 0 : index * 0.1,
-        ease: "easeOut"
-      }}
-      className="divine-card will-change-transform"
-    >
-      <div className="space-y-2 sm:space-y-3">
-        <div className="flex justify-between items-start">
-          <span className="text-xs sm:text-sm text-divine-dark/60 dark:text-white/60">
-            Chapter {verse.chapter}, Verse {verse.verse}
-          </span>
-          <span className="text-xs bg-divine-saffron/20 text-divine-saffron dark:text-divine-gold px-2 py-1 rounded-full capitalize">
-            {verse.category}
-          </span>
-        </div>
-        
-        <p className="text-xs sm:text-sm font-serif italic text-divine-dark dark:text-divine-cream">
-          {verse.sanskrit}
-        </p>
-        
-        <p className="text-sm sm:text-base font-serif text-divine-dark/90 dark:text-white/90">
-          {verse.translation}
-        </p>
-        
-        <div className="flex justify-between pt-2">
-          <button className="divine-button-secondary text-xs sm:text-sm">
-            <Play size={14} className="sm:w-4 sm:h-4" />
-            <span>Listen</span>
-          </button>
-          
-          <button className="divine-button-secondary text-xs sm:text-sm">
-            <Bookmark size={14} className="sm:w-4 sm:h-4" />
-            <span>Save</span>
-          </button>
-        </div>
-      </div>
-    </motion.div>
   );
 };
 

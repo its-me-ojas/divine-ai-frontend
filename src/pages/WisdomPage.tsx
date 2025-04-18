@@ -1,4 +1,3 @@
-
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -8,8 +7,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const WisdomPage = () => {
+  const { t } = useTranslation();
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -36,10 +37,10 @@ const WisdomPage = () => {
   return (
     <>
       <Helmet>
-        <title>Divine Wisdom | Spiritual Insights from Ancient Texts</title>
-        <meta name="description" content="Explore spiritual insights from the Bhagavad Gita, Vedas, and other ancient texts. Find peace, clarity, and wisdom for your modern life journey." />
-        <meta property="og:title" content="Divine Wisdom | Spiritual Insights from Ancient Texts" />
-        <meta property="og:description" content="Explore spiritual insights from the Bhagavad Gita, Vedas, and other ancient texts. Find peace, clarity, and wisdom for your modern life journey." />
+        <title>{t("wisdom.title")} | Spiritual Insights from Ancient Texts</title>
+        <meta name="description" content={t("wisdom.subtitle")} />
+        <meta property="og:title" content={`${t("wisdom.title")} | Spiritual Insights from Ancient Texts`} />
+        <meta property="og:description" content={t("wisdom.subtitle")} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://divineai.app/wisdom" />
         <meta property="og:image" content="https://divineai.app/wisdom-banner.jpg" />
@@ -54,9 +55,9 @@ const WisdomPage = () => {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold font-mukti text-center mt-6 mb-2">Divine Wisdom</h1>
+          <h1 className="text-3xl font-bold font-mukti text-center mt-6 mb-2">{t("wisdom.title")}</h1>
           <p className="text-divine-blue/70 dark:text-white/70 text-center mb-8 max-w-2xl mx-auto">
-            Ancient wisdom for modern life. Explore spiritual insights from sacred texts to find clarity, purpose, and inner peace.
+            {t("wisdom.subtitle")}
           </p>
         </motion.div>
 
@@ -83,7 +84,7 @@ const WisdomPage = () => {
                   </CardContent>
                   <CardFooter>
                     <Button variant="ghost" className="p-0 h-auto hover:bg-transparent group">
-                      <span className="text-divine-saffron group-hover:underline">Read Article</span>
+                      <span className="text-divine-saffron group-hover:underline">{t("wisdom.readArticle")}</span>
                       <ArrowRight size={16} className="ml-1 text-divine-saffron group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </CardFooter>

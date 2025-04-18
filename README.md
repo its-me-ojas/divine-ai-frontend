@@ -24,7 +24,7 @@ This project is built with:
 
 ## Development Setup
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The only requirement is having Node.js & npm installed 
 
 ```sh
 # Clone the repository
@@ -32,7 +32,7 @@ git clone <repository-url>
 
 # Navigate to the project directory
 cd divine-ai
-
+ok
 # Install dependencies
 npm install
 

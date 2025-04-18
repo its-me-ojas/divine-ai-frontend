@@ -1,4 +1,3 @@
-
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
@@ -9,11 +8,46 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowLeft, ArrowRight, Download, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/components/ui/use-toast";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
+import { useState } from "react";
 
 const WisdomArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const article = slug ? getArticleBySlug(slug) : undefined;
   const { toast } = useToast();
+  const [error, setError] = useState<string | null>(null);
+  
+  if (!slug) {
+    return <Navigate to="/wisdom" replace />;
+  }
+
+  let article;
+  try {
+    article = getArticleBySlug(slug);
+  } catch (err) {
+    setError("Failed to load article. Please try again later.");
+    return (
+      <div className="min-h-screen">
+        <Header />
+        <div className="container mx-auto px-4 py-8">
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => window.location.href = '/wisdom'}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Wisdom
+          </Button>
+        </div>
+        <Navigation />
+      </div>
+    );
+  }
   
   if (!article) {
     return <Navigate to="/wisdom" replace />;

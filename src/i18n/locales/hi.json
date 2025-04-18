@@ -1,0 +1,80 @@
+{
+  "common": {
+    "home": "होम",
+    "askAI": "AI से पूछें",
+    "verses": "श्लोक",
+    "wisdom": "ज्ञान",
+    "saved": "सहेजे गए",
+    "profile": "प्रोफ़ाइल",
+    "streaks": "लगातार",
+    "settings": "सेटिंग्स",
+    "darkMode": "डार्क मोड",
+    "notifications": "सूचनाएं",
+    "selectLanguage": "भाषा चुनें",
+    "back": "वापस",
+    "next": "अगला",
+    "previous": "पिछला",
+    "readMore": "और पढ़ें",
+    "save": "सहेजें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "cancel": "रद्द करें",
+    "confirm": "पुष्टि करें",
+    "error": "त्रुटि",
+    "success": "सफल",
+    "loading": "लोड हो रहा है...",
+    "noResults": "कोई परिणाम नहीं मिला"
+  },
+  "chat": {
+    "greeting": "नमस्ते!",
+    "welcomeMessage": "हिंदू ज्ञान और अध्यात्म के बारे में कुछ भी पूछें।",
+    "description": "मैं भगवद गीता और अन्य पवित्र ग्रंथों से ज्ञान प्रदान करने में आपकी सहायता करूंगा।",
+    "placeholder": "हिंदू ज्ञान के बारे में पूछें..."
+  },
+  "verses": {
+    "title": "पवित्र श्लोक",
+    "categories": {
+      "all": "सभी",
+      "karma": "कर्म",
+      "yoga": "योग",
+      "bhakti": "भक्ति",
+      "dharma": "धर्म",
+      "peace": "शांति",
+      "wisdom": "ज्ञान"
+    },
+    "chapterVerse": "अध्याय {{chapter}}, श्लोक {{verse}}",
+    "search": "श्लोक खोजें...",
+    "bookmark": "बुकमार्क करें",
+    "unbookmark": "बुकमार्क हटाएं",
+    "share": "श्लोक साझा करें"
+  },
+  "wisdom": {
+    "title": "दिव्य ज्ञान",
+    "subtitle": "आधुनिक जीवन के लिए प्राचीन ज्ञान। स्पष्टता, उद्देश्य और आंतरिक शांति पाने के लिए पवित्र ग्रंथों से आध्यात्मिक अंतर्दृष्टि का अन्वेषण करें।",
+    "readArticle": "लेख पढ़ें",
+    "relatedArticles": "अपनी आध्यात्मिक यात्रा जारी रखें",
+    "personalizedWisdom": "व्यक्तिगत दिव्य ज्ञान चाहते हैं?",
+    "tryNow": "अभी Divine AI आज़माएं"
+  },
+  "profile": {
+    "title": "आपकी प्रोफ़ाइल",
+    "name": "नाम",
+    "email": "ईमेल",
+    "language": "भाषा",
+    "preferences": "वरीयताएं",
+    "account": "खाता सेटिंग्स",
+    "notifications": "सूचना सेटिंग्स",
+    "privacy": "प्राइवेसी सेटिंग्स"
+  },
+  "streaks": {
+    "title": "आपके लगातार",
+    "currentStreak": "वर्तमान लगातार",
+    "longestStreak": "सबसे लंबा लगातार",
+    "days": "दिन",
+    "achievements": "उपलब्धियां",
+    "firstStep": "पहला कदम",
+    "seeker": "साधक",
+    "devoted": "समर्पित",
+    "scholar": "विद्वान"
+  }
+} 
