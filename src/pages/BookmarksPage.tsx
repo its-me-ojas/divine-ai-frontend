@@ -1,4 +1,3 @@
-
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { motion } from "framer-motion";
@@ -39,7 +38,7 @@ const BookmarksPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-20">
+    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-20">
       <div className="container max-w-xl mx-auto px-4">
         <Header />
         
@@ -47,15 +46,15 @@ const BookmarksPage = () => {
           <h1 className="text-2xl font-mukti font-bold mb-4">My Shlokas</h1>
           
           <div className="relative mb-6">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-divine-blue/60 dark:text-white/60" size={18} />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-divine-dark/60 dark:text-white/60" size={18} />
             <Input 
               placeholder="Search saved verses..." 
-              className="pl-10 bg-white/80 dark:bg-divine-blue/40 border-divine-lightGold/30 dark:border-divine-gold/20"
+              className="pl-10 bg-white/80 dark:bg-divine-dark/40 border-divine-lightGold/30 dark:border-divine-gold/20"
             />
           </div>
           
           <Tabs defaultValue="all" className="w-full mb-6">
-            <TabsList className="grid grid-cols-4 mb-6 bg-divine-cream/80 dark:bg-divine-blue/80">
+            <TabsList className="grid grid-cols-4 mb-6 bg-divine-cream/80 dark:bg-divine-dark/80">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="favorites">Favorites</TabsTrigger>
               <TabsTrigger value="karma">Karma</TabsTrigger>
@@ -122,22 +121,22 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
     >
       <div className="space-y-2">
         <div className="flex justify-between items-start">
-          <span className="text-sm text-divine-blue/60 dark:text-white/60">
+          <span className="text-sm text-divine-dark/60 dark:text-white/60">
             Chapter {bookmark.chapter}, Verse {bookmark.verse}
           </span>
           <button>
             <Heart
               size={18}
-              className={bookmark.isFavorite ? "fill-divine-saffron text-divine-saffron" : "text-divine-blue/60 dark:text-white/60"}
+              className={bookmark.isFavorite ? "fill-divine-saffron text-divine-saffron" : "text-divine-dark/60 dark:text-white/60"}
             />
           </button>
         </div>
         
-        <p className="text-sm font-serif italic text-divine-blue dark:text-divine-cream">
+        <p className="text-sm font-serif italic text-divine-dark dark:text-divine-cream">
           {bookmark.sanskrit}
         </p>
         
-        <p className="text-base font-serif text-divine-blue/90 dark:text-white/90">
+        <p className="text-base font-serif text-divine-dark/90 dark:text-white/90">
           {bookmark.translation}
         </p>
         

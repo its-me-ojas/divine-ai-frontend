@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { SendHorizonal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -91,12 +90,12 @@ const ChatInterface = () => {
       transition={{ duration: 0.8, delay: 0.3 }}
       className="flex flex-col h-full w-full mt-4"
     >
-      <h2 className="text-xl font-mukti font-semibold mb-4 text-divine-blue dark:text-white">Ask the Divine</h2>
+      <h2 className="text-xl font-mukti font-semibold mb-4 text-divine-dark dark:text-white">Ask the Divine</h2>
       
       <div className="flex-1 overflow-y-auto mb-4 divine-card">
         <div className="space-y-4 p-2">
           {messages.length === 0 ? (
-            <div className="text-center py-8 text-divine-blue/60 dark:text-white/60 italic">
+            <div className="text-center py-8 text-divine-dark/60 dark:text-white/60 italic">
               Ask any question about Hindu wisdom, spirituality, or the Bhagavad Gita
             </div>
           ) : (
@@ -114,7 +113,7 @@ const ChatInterface = () => {
                     className={`max-w-[80%] rounded-xl px-4 py-3 ${
                       message.sender === 'user'
                         ? 'bg-divine-saffron/90 text-white rounded-br-none'
-                        : 'bg-divine-cream dark:bg-divine-blue/80 text-divine-blue dark:text-white rounded-bl-none'
+                        : 'bg-divine-cream dark:bg-divine-dark/80 text-divine-dark dark:text-white rounded-bl-none'
                     }`}
                   >
                     <p className="text-sm">{message.text}</p>
@@ -139,7 +138,7 @@ const ChatInterface = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Ask about Hindu wisdom or spirituality..."
-          className="flex-1 px-4 py-3 rounded-full border border-divine-lightGold/30 dark:border-divine-gold/20 bg-white/80 dark:bg-divine-blue/40 focus:outline-none focus:ring-2 focus:ring-divine-gold/50 dark:focus:ring-divine-gold/30"
+          className="flex-1 px-4 py-3 rounded-full border border-divine-lightGold/30 dark:border-divine-gold/20 bg-white/80 dark:bg-divine-dark/40 focus:outline-none focus:ring-2 focus:ring-divine-gold/50 dark:focus:ring-divine-gold/30"
         />
         <motion.button
           onClick={handleSend}

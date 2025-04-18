@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -66,7 +65,7 @@ export default {
 				// Divine AI custom colors
 				divine: {
 					saffron: "#FF9933",
-					blue: "#00264D",
+					dark: "#111111",
 					gold: "#FFD700",
 					lightGold: "#FFF0B3",
 					cream: "#FFF5E1"

@@ -1,4 +1,3 @@
-
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { motion } from "framer-motion";
@@ -49,7 +48,7 @@ const StreaksPage = () => {
   const dashOffset = circumference * (1 - animatedStreak / 30);
 
   return (
-    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-20">
+    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-20">
       <div className="container max-w-xl mx-auto px-4">
         <Header />
         
@@ -73,7 +72,7 @@ const StreaksPage = () => {
               <div className="relative w-36 h-36 flex items-center justify-center">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
                   <circle
-                    className="text-divine-cream dark:text-divine-blue/60 stroke-current"
+                    className="text-divine-cream dark:text-divine-dark/60 stroke-current"
                     strokeWidth="8"
                     fill="transparent"
                     r={radius}
@@ -109,7 +108,7 @@ const StreaksPage = () => {
                 </div>
               </div>
               
-              <div className="text-divine-blue/70 dark:text-white/70">
+              <div className="text-divine-dark/70 dark:text-white/70">
                 <p>Longest Streak: {longestStreak} days</p>
                 <p className="text-sm mt-1">Keep going on your spiritual journey!</p>
               </div>
@@ -132,12 +131,12 @@ const StreaksPage = () => {
                   transition={{ duration: 0.5, delay: 0.1 * index }}
                   className="flex flex-col items-center"
                 >
-                  <span className="text-xs text-divine-blue/70 dark:text-white/70">{day.dayName}</span>
+                  <span className="text-xs text-divine-dark/70 dark:text-white/70">{day.dayName}</span>
                   <motion.div 
                     initial={day.isActive ? { scale: 0.8 } : {}}
                     animate={day.isActive ? { scale: [0.8, 1.1, 1] } : {}}
                     transition={day.isActive ? { duration: 0.5, delay: 0.1 * index + 0.3 } : {}}
-                    className={`w-8 h-8 mt-1 rounded-full flex items-center justify-center ${day.isActive ? 'bg-divine-saffron text-white' : 'bg-divine-cream/70 dark:bg-divine-blue/70 text-divine-blue/60 dark:text-white/60'}`}
+                    className={`w-8 h-8 mt-1 rounded-full flex items-center justify-center ${day.isActive ? 'bg-divine-saffron text-white' : 'bg-divine-cream/70 dark:bg-divine-dark/70 text-divine-dark/60 dark:text-white/60'}`}
                   >
                     {day.dayNumber}
                   </motion.div>
@@ -165,7 +164,7 @@ const StreaksPage = () => {
                     type: achievement.completed ? "spring" : "easeOut",
                     stiffness: achievement.completed ? 150 : 100
                   }}
-                  className={`flex items-center gap-3 p-3 rounded-lg ${achievement.completed ? 'bg-divine-cream/70 dark:bg-divine-blue/30' : 'bg-divine-cream/30 dark:bg-divine-blue/20 opacity-60'}`}
+                  className={`flex items-center gap-3 p-3 rounded-lg ${achievement.completed ? 'bg-divine-cream/70 dark:bg-divine-dark/30' : 'bg-divine-cream/30 dark:bg-divine-dark/20 opacity-60'}`}
                 >
                   <motion.div
                     animate={achievement.completed ? { 
@@ -182,7 +181,7 @@ const StreaksPage = () => {
                   
                   <div>
                     <h3 className="font-medium">{achievement.name}</h3>
-                    <p className="text-sm text-divine-blue/70 dark:text-white/70">{achievement.description}</p>
+                    <p className="text-sm text-divine-dark/70 dark:text-white/70">{achievement.description}</p>
                   </div>
                   
                   {achievement.completed && (

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import SplashScreen from "../components/SplashScreen";
 import Header from "../components/Header";
@@ -65,7 +64,7 @@ const Index = () => {
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       
-      <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-16">
+      <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-16">
         <div className="container max-w-xl mx-auto px-3 sm:px-4">
           <Header />
           

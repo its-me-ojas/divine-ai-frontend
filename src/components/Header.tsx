@@ -1,4 +1,3 @@
-
 import { User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -35,7 +34,7 @@ const Header = () => {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-xl font-mukti font-bold text-divine-blue dark:text-white"
+          className="text-xl font-mukti font-bold text-divine-dark dark:text-white"
         >
           Divine AI
         </motion.h1>
@@ -53,8 +52,8 @@ const Header = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <Link to="/profile" className="w-9 h-9 rounded-full bg-divine-cream dark:bg-divine-blue flex items-center justify-center shadow-sm border border-divine-lightGold/30 dark:border-divine-gold/20">
-          <User size={18} className="text-divine-blue dark:text-white" />
+        <Link to="/profile" className="w-9 h-9 rounded-full bg-divine-cream dark:bg-divine-dark flex items-center justify-center shadow-sm border border-divine-lightGold/30 dark:border-divine-gold/20">
+          <User size={18} className="text-divine-dark dark:text-white" />
         </Link>
       </motion.div>
     </motion.header>

@@ -1,4 +1,3 @@
-
 import { Share } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -59,26 +58,32 @@ const DailyVerse = ({ verse }: DailyVerseProps) => {
       className="w-full will-change-transform"
     >
       <div className="divine-card">
-        <div className="flex flex-col space-y-3 sm:space-y-4">
+        <div className="flex flex-col space-y-6">
           <div className="flex justify-between items-start">
-            <h3 className="text-xs sm:text-sm text-divine-blue/60 dark:text-white/60">
+            <h3 className="text-sm font-medium text-divine-dark/80 dark:text-white/90">
               Today's Wisdom • Chapter {verse.chapter}, Verse {verse.verse}
             </h3>
           </div>
           
-          <blockquote className="text-center italic text-base sm:text-lg font-serif text-divine-blue dark:text-divine-cream border-l-4 border-divine-gold/50 pl-3 sm:pl-4 py-1">
-            {verse.sanskrit}
-          </blockquote>
-          
-          <p className="text-sm sm:text-base font-serif text-divine-blue/90 dark:text-white/90">
-            {verse.translation}
-          </p>
-          
-          <div className="text-xs sm:text-sm text-divine-blue/70 dark:text-white/70 bg-divine-cream/50 dark:bg-divine-blue/30 p-2 sm:p-3 rounded-lg">
-            <p>{verse.explanation}</p>
+          <div className="border-l-[3px] border-divine-saffron pl-4">
+            <p className="text-lg sm:text-xl font-serif italic text-divine-dark dark:text-divine-cream">
+              {verse.sanskrit}
+            </p>
           </div>
           
-          <div className="flex justify-end">
+          <div className="space-y-4">
+            <p className="text-base sm:text-lg font-serif text-divine-dark dark:text-white/95 leading-relaxed tracking-wide">
+              {verse.translation}
+            </p>
+            
+            <div className="bg-divine-cream/30 dark:bg-white/5 p-4 rounded-lg border border-divine-saffron/10">
+              <p className="text-sm sm:text-base text-divine-dark/90 dark:text-white/80 leading-relaxed">
+                {verse.explanation}
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex justify-end pt-2">
             <motion.button 
               onClick={handleShare}
               className="divine-button-secondary"

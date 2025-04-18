@@ -1,4 +1,3 @@
-
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { motion, useReducedMotion } from "framer-motion";
@@ -43,7 +42,7 @@ const VersesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-16">
+    <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-16">
       <div className="container max-w-xl mx-auto px-3 sm:px-4">
         <Header />
         
@@ -51,7 +50,7 @@ const VersesPage = () => {
           <h1 className="text-xl sm:text-2xl font-mukti font-bold mb-4 sm:mb-6">Sacred Verses</h1>
           
           <Tabs defaultValue="all" className="w-full mb-4 sm:mb-6">
-            <TabsList className="grid grid-cols-4 mb-4 sm:mb-6 bg-divine-cream/80 dark:bg-divine-blue/80">
+            <TabsList className="grid grid-cols-4 mb-4 sm:mb-6 bg-divine-cream/80 dark:bg-divine-dark/80">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="karma">Karma</TabsTrigger>
               <TabsTrigger value="yoga">Yoga</TabsTrigger>
@@ -143,7 +142,7 @@ const VerseCard = ({ verse, index, prefersReducedMotion }: VerseCardProps) => {
     >
       <div className="space-y-2 sm:space-y-3">
         <div className="flex justify-between items-start">
-          <span className="text-xs sm:text-sm text-divine-blue/60 dark:text-white/60">
+          <span className="text-xs sm:text-sm text-divine-dark/60 dark:text-white/60">
             Chapter {verse.chapter}, Verse {verse.verse}
           </span>
           <span className="text-xs bg-divine-saffron/20 text-divine-saffron dark:text-divine-gold px-2 py-1 rounded-full capitalize">
@@ -151,11 +150,11 @@ const VerseCard = ({ verse, index, prefersReducedMotion }: VerseCardProps) => {
           </span>
         </div>
         
-        <p className="text-xs sm:text-sm font-serif italic text-divine-blue dark:text-divine-cream">
+        <p className="text-xs sm:text-sm font-serif italic text-divine-dark dark:text-divine-cream">
           {verse.sanskrit}
         </p>
         
-        <p className="text-sm sm:text-base font-serif text-divine-blue/90 dark:text-white/90">
+        <p className="text-sm sm:text-base font-serif text-divine-dark/90 dark:text-white/90">
           {verse.translation}
         </p>
         
