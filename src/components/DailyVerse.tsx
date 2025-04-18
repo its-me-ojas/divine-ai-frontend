@@ -59,7 +59,7 @@ const DailyVerse = ({ verse }: DailyVerseProps) => {
       className="w-full will-change-transform"
     >
       <div className="divine-card">
-        <div className="flex flex-col space-y-3 sm:space-y-4">
+        <div className="flex flex-col space-y-2 sm:space-y-3">
           <div className="flex justify-between items-start">
             <h3 className="text-xs sm:text-sm text-divine-blue/60 dark:text-white/60">
               Today's Wisdom • Chapter {verse.chapter}, Verse {verse.verse}
