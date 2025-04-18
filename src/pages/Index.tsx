@@ -1,68 +1,101 @@
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect, useRef } from "react";
+import SplashScreen from "../components/SplashScreen";
+import Header from "../components/Header";
+import DailyVerse from "../components/DailyVerse";
+import ChatInterface from "../components/ChatInterface";
+import Navigation from "../components/Navigation";
+import FloatingChatButton from "../components/FloatingChatButton";
+import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
+  const [showSplash, setShowSplash] = useState(true);
+  const [showChat, setShowChat] = useState(false);
+  const dailyVerseRef = useRef<HTMLDivElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  
+  // Daily verse data
+  const dailyVerse = {
+    sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+    translation: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself to be the cause of the results of your activities, and never be attached to not doing your duty.",
+    explanation: "This verse from the Bhagavad Gita (Chapter 2, Verse 47) teaches us to focus on our actions rather than their results. By performing our duties without attachment to success or failure, we find inner peace.",
+    chapter: 2,
+    verse: 47
+  };
+
+  // Function to scroll to daily verse
+  const scrollToDailyVerse = () => {
+    if (dailyVerseRef.current) {
+      dailyVerseRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Function to scroll to chat
+  const scrollToChat = () => {
+    setShowChat(true);
+    
+    // Small delay to ensure chat is rendered before scrolling
+    setTimeout(() => {
+      if (chatRef.current) {
+        chatRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  // Check if user is coming back to home page
+  useEffect(() => {
+    if (location.pathname === "/" && !showSplash) {
+      // If animation has been shown already, automatically scroll to daily verse
+      const hasShownHomeAnimation = localStorage.getItem("homeAnimationShown") === "true";
+      
+      if (hasShownHomeAnimation) {
+        // Small delay to ensure components are rendered
+        setTimeout(scrollToDailyVerse, 300);
+      } else {
+        // Mark home animation as shown
+        localStorage.setItem("homeAnimationShown", "true");
+      }
+    }
+  }, [location.pathname, showSplash]);
+
   return (
-    <div className="min-h-screen flex flex-col transition-theme">
-      <div className="flex-1 container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Divine AI Sadhana Path</h1>
-          <p className="text-xl text-muted-foreground">
-            Explore ancient Hindu wisdom through modern AI technology
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <Card className="transition-theme">
-            <CardHeader>
-              <CardTitle>Spiritual Wisdom</CardTitle>
-              <CardDescription>
-                Discover insights from ancient Hindu texts
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>
-                Access timeless knowledge from the Vedas, Upanishads, Bhagavad Gita and more.
-                Our AI-powered platform makes these teachings accessible and relevant.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Explore Wisdom</Button>
-            </CardFooter>
-          </Card>
-
-          <Card className="transition-theme">
-            <CardHeader>
-              <CardTitle>Digital Sadhana</CardTitle>
-              <CardDescription>
-                Practice spiritual disciplines with technological support
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>
-                Enhance your meditation, prayer, and study with AI-assisted tools.
-                Track your progress and build consistency in your spiritual practice.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Start Sadhana</Button>
-            </CardFooter>
-          </Card>
-        </div>
-
-        <div className="bg-primary/5 rounded-lg p-8 text-center transition-theme">
-          <h2 className="text-2xl font-bold mb-4">Begin Your Spiritual Journey</h2>
-          <p className="mb-6">
-            Our platform combines the depth of Hindu philosophy with the convenience of modern technology.
-            Start your journey toward self-realization and inner peace today.
-          </p>
-          <Button size="lg" className="transition-theme">
-            Get Started
-          </Button>
+    <>
+      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      
+      <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-blue/95 text-divine-blue dark:text-white pb-20">
+        <div className="container max-w-xl mx-auto px-4">
+          <Header />
+          
+          <main className="py-4">
+            <div ref={dailyVerseRef}>
+              <DailyVerse verse={dailyVerse} />
+            </div>
+            
+            <AnimatePresence>
+              {showChat && (
+                <motion.div 
+                  ref={chatRef}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-8"
+                >
+                  <ChatInterface />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </main>
+          
+          <Navigation />
         </div>
       </div>
-    </div>
+      
+      {/* Floating chat button */}
+      {!showSplash && <FloatingChatButton onClick={scrollToChat} />}
+    </>
   );
 };
 

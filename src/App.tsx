@@ -4,52 +4,39 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
+import VersesPage from "./pages/VersesPage";
+import StreaksPage from "./pages/StreaksPage";
+import BookmarksPage from "./pages/BookmarksPage";
+import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
-import Navigation from "./components/Navigation";
-
-// Initialize dark mode from localStorage or system preference
-function ThemeInitializer() {
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if (
-      storedTheme === "dark" || 
-      (storedTheme === null && prefersDark)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-  
-  return null;
-}
+import WisdomPage from "./pages/WisdomPage";
+import WisdomArticlePage from "./pages/WisdomArticlePage";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <ThemeInitializer />
-      <BrowserRouter>
-        <div className="min-h-screen flex flex-col transition-theme">
-          <Navigation />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/verses" element={<VersesPage />} />
+            <Route path="/streaks" element={<StreaksPage />} />
+            <Route path="/bookmarks" element={<BookmarksPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/wisdom" element={<WisdomPage />} />
+            <Route path="/wisdom/:slug" element={<WisdomArticlePage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;
