@@ -64,36 +64,43 @@ const Index = () => {
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       
-      <div className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-16">
-        <div className="container max-w-xl mx-auto px-3 sm:px-4">
-          <Header />
-          
-          <main className="py-3 sm:py-4">
-            <div ref={dailyVerseRef}>
-              <DailyVerse verse={dailyVerse} />
-            </div>
+      {!showSplash && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="min-h-screen bg-divine-cream/50 dark:bg-divine-dark text-divine-dark dark:text-white pb-16"
+        >
+          <div className="container max-w-xl mx-auto px-3 sm:px-4">
+            <Header />
             
-            {/* Chat Interface (commented out)
-            <AnimatePresence mode="wait">
-              {showChat && (
-                <motion.div 
-                  ref={chatRef}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-4 sm:mt-6"
-                >
-                  <ChatInterface />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            */}
-          </main>
-          
-          <Navigation />
-        </div>
-      </div>
+            <main className="py-3 sm:py-4">
+              <div ref={dailyVerseRef}>
+                <DailyVerse verse={dailyVerse} />
+              </div>
+              
+              {/* Chat Interface (commented out)
+              <AnimatePresence mode="wait">
+                {showChat && (
+                  <motion.div 
+                    ref={chatRef}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-4 sm:mt-6"
+                  >
+                    <ChatInterface />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              */}
+            </main>
+            
+            <Navigation />
+          </div>
+        </motion.div>
+      )}
       
       {/* Floating chat button (commented out)
       {!showSplash && <FloatingChatButton onClick={scrollToChat} />}

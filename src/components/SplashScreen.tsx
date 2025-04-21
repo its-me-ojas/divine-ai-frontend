@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -42,7 +41,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     <AnimatePresence>
       {isAnimating && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center bg-divine-blue z-50"
+          className="fixed inset-0 flex items-center justify-center bg-divine-blue z-[9999]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -90,23 +89,14 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               </motion.div>
             </motion.div>
 
-            <motion.h1
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className="text-3xl font-mukti font-bold text-white"
-            >
-              Divine AI
-            </motion.h1>
-
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-              className="text-lg text-white/80 font-serif"
-            >
-              Your Personal Guide to Spiritual Wisdom
-            </motion.p>
+            <div className="flex flex-col items-center space-y-4 z-[10000]">
+              <h1 className="text-3xl font-mukti font-bold text-black">
+                Divine AI
+              </h1>
+              <p className="text-lg text-black font-serif">
+                Your Personal Guide to Spiritual Wisdom
+              </p>
+            </div>
           </div>
         </motion.div>
       )}
