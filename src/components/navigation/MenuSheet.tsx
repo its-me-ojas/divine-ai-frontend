@@ -48,14 +48,14 @@ const MenuSheet = ({
       </SheetTrigger>
       <SheetContent 
         side="right" 
-        className="w-[300px] sm:w-[400px] bg-background/95 dark:bg-background/95 border-border backdrop-blur-xl"
+        className="w-[280px] sm:w-[320px] bg-background/95 dark:bg-background/95 border-border backdrop-blur-xl p-6"
       >
-        <div className="flex flex-col gap-6">
+        <div className="space-y-6">
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">{t("common.settings")}</h2>
+            <h2 className="text-xl font-mukti font-semibold mb-4">{t("common.settings")}</h2>
             
-            <div className="flex items-center justify-between">
-              <Label htmlFor="dark-mode">{t("common.darkMode")}</Label>
+            <div className="flex items-center justify-between py-2">
+              <Label htmlFor="dark-mode" className="text-base">{t("common.darkMode")}</Label>
               <Switch
                 id="dark-mode"
                 checked={isDarkMode}
@@ -63,8 +63,8 @@ const MenuSheet = ({
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <Label htmlFor="notifications">{t("common.notifications")}</Label>
+            <div className="flex items-center justify-between py-2">
+              <Label htmlFor="notifications" className="text-base">{t("common.notifications")}</Label>
               <Switch
                 id="notifications"
                 checked={showNotifications}
@@ -72,13 +72,13 @@ const MenuSheet = ({
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="language">{t("common.selectLanguage")}</Label>
+            <div className="space-y-2 py-2">
+              <Label htmlFor="language" className="text-base">{t("common.selectLanguage")}</Label>
               <Select
                 value={i18n.language}
                 onValueChange={handleLanguageChange}
               >
-                <SelectTrigger id="language">
+                <SelectTrigger id="language" className="w-full">
                   <SelectValue placeholder={t("common.selectLanguage")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -90,18 +90,18 @@ const MenuSheet = ({
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h2 className="text-lg font-semibold">{t("common.profile")}</h2>
+          <div className="space-y-3 pt-4 border-t border-border">
+            <h2 className="text-xl font-mukti font-semibold mb-2">{t("common.profile")}</h2>
             <Link
               to="/profile"
-              className="block py-2 px-4 rounded-lg hover:bg-accent transition-colors"
+              className="block py-3 px-4 rounded-lg hover:bg-accent transition-colors text-base"
               onClick={() => setIsOpen(false)}
             >
               {t("profile.account")}
             </Link>
             <Link
               to="/streaks"
-              className="block py-2 px-4 rounded-lg hover:bg-accent transition-colors"
+              className="block py-3 px-4 rounded-lg hover:bg-accent transition-colors text-base"
               onClick={() => setIsOpen(false)}
             >
               {t("common.streaks")}
