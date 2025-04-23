@@ -17,6 +17,10 @@ import ChatPage from "./pages/ChatPage";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./i18n/config";
 import ReadPage from "./pages/ReadPage";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // Scroll restoration component
 function ScrollToTop() {
@@ -46,22 +50,65 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/chat" element={<ChatPage />} />
-                <Route path="/verses" element={<VersesPage />} />
-                <Route path="/wisdom" element={<WisdomPage />} />
-                <Route path="/wisdom/:slug" element={<WisdomArticlePage />} />
-                <Route path="/bookmarks" element={<BookmarksPage />} />
-                <Route path="/streaks" element={<StreaksPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/read" element={<ReadPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <AuthProvider>
+                <ScrollToTop />
+                <Routes>
+                  {/* Public routes */}
+                  <Route path="/signin" element={<SignInPage />} />
+                  <Route path="/signup" element={<SignUpPage />} />
+                  
+                  {/* Protected routes */}
+                  <Route path="/" element={
+                    <ProtectedRoute>
+                      <Index />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/chat" element={
+                    <ProtectedRoute>
+                      <ChatPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/verses" element={
+                    <ProtectedRoute>
+                      <VersesPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/wisdom" element={
+                    <ProtectedRoute>
+                      <WisdomPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/wisdom/:slug" element={
+                    <ProtectedRoute>
+                      <WisdomArticlePage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/bookmarks" element={
+                    <ProtectedRoute>
+                      <BookmarksPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/streaks" element={
+                    <ProtectedRoute>
+                      <StreaksPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/profile" element={
+                    <ProtectedRoute>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/read" element={
+                    <ProtectedRoute>
+                      <ReadPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Toaster />
+                <Sonner />
+              </AuthProvider>
             </BrowserRouter>
-            <Toaster />
-            <Sonner />
           </TooltipProvider>
         </QueryClientProvider>
       </HelmetProvider>
