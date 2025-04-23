@@ -79,7 +79,7 @@ const ChatPage = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-2xl font-mukti font-bold mb-6"
+            className="text-2xl font-mukti font-bold mb-6 text-center"
           >
             {t("chat.greeting")}
           </motion.h1>
@@ -94,57 +94,39 @@ const ChatPage = () => {
                 </div>
               ) : (
                 messages.map((message) => (
-                  <motion.div
+                  <div
                     key={message.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
                     className={cn(
-                      "flex flex-col space-y-1",
-                      message.role === "user" ? "items-end" : "items-start"
+                      "flex",
+                      message.role === "user" ? "justify-end" : "justify-start"
                     )}
                   >
                     <div
                       className={cn(
-                        "rounded-lg px-4 py-2 max-w-[80%] prose dark:prose-invert prose-p:my-0 prose-headings:my-0 prose-ul:my-0 prose-ol:my-0",
+                        "max-w-[80%] rounded-lg p-4",
                         message.role === "user"
-                          ? "bg-divine-saffron text-white"
-                          : "bg-divine-cream/80 dark:bg-[#2A2A2A] text-divine-blue dark:text-white"
+                          ? "bg-divine-saffron/10 text-divine-blue dark:text-white"
+                          : "bg-divine-cream dark:bg-[#1E1E1E] text-divine-blue dark:text-white"
                       )}
                     >
-                      {message.role === "user" ? (
-                        message.content
-                      ) : (
-                        <ReactMarkdown>{message.content}</ReactMarkdown>
-                      )}
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
                     </div>
-                  </motion.div>
+                  </div>
                 ))
               )}
-              {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex items-center space-x-2 text-divine-blue/50 dark:text-white/50"
-                >
-                  <div className="w-2 h-2 rounded-full bg-current animate-bounce" />
-                  <div className="w-2 h-2 rounded-full bg-current animate-bounce" style={{ animationDelay: "0.2s" }} />
-                  <div className="w-2 h-2 rounded-full bg-current animate-bounce" style={{ animationDelay: "0.4s" }} />
-                </motion.div>
-              )}
             </div>
-
-            <div className="p-4 border-t border-divine-lightGold/30 dark:border-divine-gold/10">
-              <div className="flex space-x-2">
+            <div className="p-4 border-t border-divine-gold/10 dark:border-divine-gold/20">
+              <div className="flex gap-2">
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder={t("chat.placeholder")}
-                  className="flex-1 bg-white/80 dark:bg-[#2A2A2A] border-divine-lightGold/30 dark:border-divine-gold/10"
+                  className="flex-1"
                 />
                 <Button
                   onClick={handleSend}
-                  disabled={!input.trim() || isLoading}
+                  disabled={isLoading || !input.trim()}
                   className="divine-button"
                 >
                   <Send size={18} />
