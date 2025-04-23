@@ -27,14 +27,14 @@ const NavItem = ({ to, icon, label, isActive, variants, custom }: NavItemProps) 
       <Link
         to={to}
         className={cn(
-          "flex flex-col items-center justify-center gap-1 p-2 rounded-lg transition-colors",
+          "flex flex-col items-center justify-center gap-1.5 p-2 rounded-lg transition-colors",
           isActive
             ? "text-primary"
             : "text-muted-foreground hover:text-foreground"
         )}
       >
         {icon}
-        <span className="text-xs">{label}</span>
+        <span className="text-xs font-medium tracking-wide">{label}</span>
       </Link>
     </motion.div>
   );
