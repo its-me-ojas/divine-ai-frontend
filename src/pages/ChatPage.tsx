@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import { api } from "@/lib/api";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id: string;
@@ -35,18 +37,29 @@ const ChatPage = () => {
     setInput("");
     setIsLoading(true);
 
-    // TODO: Integrate with backend
-    // Temporary mock response
-    setTimeout(() => {
+    try {
+      const response = await api.askQuestion(input);
+      
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "🙏 Namaste! I'm simulating a response for now. Backend integration coming soon.",
+        content: response,
         role: "assistant",
         timestamp: new Date(),
       };
+      
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      // Handle error by showing an error message
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "Sorry, I encountered an error. Please try again later.",
+        role: "assistant",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -92,13 +105,17 @@ const ChatPage = () => {
                   >
                     <div
                       className={cn(
-                        "rounded-lg px-4 py-2 max-w-[80%]",
+                        "rounded-lg px-4 py-2 max-w-[80%] prose dark:prose-invert prose-p:my-0 prose-headings:my-0 prose-ul:my-0 prose-ol:my-0",
                         message.role === "user"
                           ? "bg-divine-saffron text-white"
                           : "bg-divine-cream/80 dark:bg-[#2A2A2A] text-divine-blue dark:text-white"
                       )}
                     >
-                      {message.content}
+                      {message.role === "user" ? (
+                        message.content
+                      ) : (
+                        <ReactMarkdown>{message.content}</ReactMarkdown>
+                      )}
                     </div>
                   </motion.div>
                 ))

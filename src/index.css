@@ -98,37 +98,57 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans overflow-x-hidden;
+    @apply bg-background text-foreground font-sans;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-mukti;
+    @apply font-mukti font-bold;
   }
-  
+
   p {
-    @apply font-serif;
+    @apply text-base leading-relaxed;
+  }
+
+  .divine-card {
+    @apply bg-card text-card-foreground rounded-lg shadow-sm border border-divine-lightGold/30 dark:border-divine-gold/10 p-4;
+  }
+
+  .divine-button {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 rounded-full px-4 py-2 transition-colors duration-200;
+  }
+
+  .divine-button-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/60 rounded-full px-4 py-2 transition-colors duration-200;
+  }
+
+  .nav-item {
+    @apply text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground transition-colors duration-200;
+  }
+
+  .nav-item.active {
+    @apply text-foreground dark:text-foreground;
   }
 }
 
 @layer components {
   .divine-card {
-    @apply bg-white/90 dark:bg-black/40 rounded-xl sm:rounded-2xl shadow-sm border border-primary/20 dark:border-primary/10 backdrop-blur-sm p-4 sm:p-6;
+    @apply bg-card text-card-foreground rounded-lg shadow-sm border border-divine-lightGold/30 dark:border-divine-gold/10 p-4;
   }
-  
+
   .divine-button {
-    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 rounded-full px-4 py-2 transition-colors duration-200;
   }
-  
+
   .divine-button-secondary {
-    @apply bg-secondary hover:bg-secondary/90 dark:bg-secondary/10 dark:hover:bg-secondary/20 text-foreground font-medium rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow border border-primary/20 dark:border-primary/10;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/60 rounded-full px-4 py-2 transition-colors duration-200;
   }
-  
+
   .nav-item {
-    @apply flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-lg transition-all text-muted-foreground;
+    @apply text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground transition-colors duration-200;
   }
-  
+
   .nav-item.active {
-    @apply text-primary;
+    @apply text-foreground dark:text-foreground;
   }
 }
 
