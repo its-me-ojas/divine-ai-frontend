@@ -1,5 +1,5 @@
-import { Home, BookOpen, Award, Bookmark, BookText, MessageCircle } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Home, BookOpen, Award, Bookmark, BookText, MessageCircle, Book } from "lucide-react";
+import { useLocation, Link } from "react-router-dom";
 import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import NavItem from "./navigation/NavItem";
@@ -31,6 +31,7 @@ const Navigation = () => {
   const navItems = [
     { to: "/", icon: <Home size={20} />, label: t("common.home") },
     { to: "/chat", icon: <MessageCircle size={20} />, label: t("common.askAI") },
+    { to: "/read", icon: <Book size={20} />, label: t("common.gita") },
     { to: "/verses", icon: <BookOpen size={20} />, label: t("common.verses") },
     { to: "/wisdom", icon: <BookText size={20} />, label: t("common.wisdom") },
     { to: "/bookmarks", icon: <Bookmark size={20} />, label: t("common.saved") },

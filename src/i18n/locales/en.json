@@ -23,7 +23,8 @@
     "error": "Error",
     "success": "Success",
     "loading": "Loading...",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "gita": "Gita"
   },
   "chat": {
     "greeting": "Namaste!",

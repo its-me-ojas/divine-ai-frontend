@@ -16,6 +16,7 @@ import WisdomArticlePage from "./pages/WisdomArticlePage";
 import ChatPage from "./pages/ChatPage";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./i18n/config";
+import ReadPage from "./pages/ReadPage";
 
 // Scroll restoration component
 function ScrollToTop() {
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/bookmarks" element={<BookmarksPage />} />
                 <Route path="/streaks" element={<StreaksPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/read" element={<ReadPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
