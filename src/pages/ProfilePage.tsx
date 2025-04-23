@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { motion } from "framer-motion";
@@ -10,28 +11,41 @@ import { useTheme } from "@/hooks/useTheme";
 
 const ProfilePage = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const [shouldAnimate, setShouldAnimate] = useState(() => {
+    const hasAnimated = sessionStorage.getItem("profileAnimated");
+    return !hasAnimated;
+  });
+
+  useEffect(() => {
+    if (shouldAnimate) {
+      sessionStorage.setItem("profileAnimated", "true");
+      const timer = setTimeout(() => setShouldAnimate(false), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldAnimate]);
+
   // Staggered animation for containers
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: (i: number) => ({
       opacity: 1,
       transition: {
-        delay: i * 0.2,
-        duration: 0.6,
+        delay: shouldAnimate ? i * 0.2 : 0,
+        duration: shouldAnimate ? 0.6 : 0,
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.2
+        staggerChildren: shouldAnimate ? 0.2 : 0
       }
     })
   };
 
   // Child animation variants
   const childVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: shouldAnimate ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.5 } 
+      transition: { duration: shouldAnimate ? 0.5 : 0 } 
     }
   };
 
@@ -42,9 +56,9 @@ const ProfilePage = () => {
         
         <main className="py-4">
           <motion.h1
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: shouldAnimate ? 0 : 1, y: shouldAnimate ? -10 : 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldAnimate ? 0.6 : 0 }}
             className="text-2xl font-mukti font-bold mb-6"
           >
             Your Profile
@@ -60,11 +74,11 @@ const ProfilePage = () => {
             <div className="flex flex-col items-center text-center space-y-4">
               <motion.div 
                 className="relative"
-                initial={{ scale: 0.8, opacity: 0 }}
+                initial={{ scale: shouldAnimate ? 0.8 : 1, opacity: shouldAnimate ? 0 : 1 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ 
-                  duration: 0.6, 
-                  delay: 0.2,
+                  duration: shouldAnimate ? 0.6 : 0, 
+                  delay: shouldAnimate ? 0.2 : 0,
                   type: "spring",
                   stiffness: 200
                 }}

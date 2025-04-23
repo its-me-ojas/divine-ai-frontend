@@ -7,11 +7,26 @@ import Navigation from "../components/Navigation";
 import { useLocation } from "react-router-dom";
 
 const Index = () => {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    const hasShownSplash = sessionStorage.getItem("splashShown");
+    return !hasShownSplash;
+  });
+  const [shouldAnimate, setShouldAnimate] = useState(() => {
+    const hasAnimated = sessionStorage.getItem("homeAnimated");
+    return !hasAnimated;
+  });
   const dailyVerseRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
   
+  useEffect(() => {
+    if (shouldAnimate) {
+      sessionStorage.setItem("homeAnimated", "true");
+      const timer = setTimeout(() => setShouldAnimate(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldAnimate]);
+
   const dailyVerse = {
     sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
     translation: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself to be the cause of the results of your activities, and never be attached to not doing your duty.",
@@ -42,7 +57,12 @@ const Index = () => {
 
   return (
     <>
-      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      {showSplash && (
+        <SplashScreen onComplete={() => {
+          setShowSplash(false);
+          sessionStorage.setItem("splashShown", "true");
+        }} />
+      )}
       
       {!showSplash && (
         <motion.div
