@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@/hooks/useTheme";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -8,6 +9,7 @@ interface SplashScreenProps {
 const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [isAnimating, setIsAnimating] = useState(true);
   const [shouldShowSplash, setShouldShowSplash] = useState(true);
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     // Check if the splash screen has been shown in this session
@@ -41,7 +43,9 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     <AnimatePresence>
       {isAnimating && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center bg-divine-blue z-[9999]"
+          className={`fixed inset-0 flex items-center justify-center ${
+            isDarkMode ? 'bg-divine-dark' : 'bg-white'
+          } z-[9999]`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -72,7 +76,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                   ease: "easeInOut",
                 }
               }}
-              className="w-24 h-24 rounded-full bg-divine-gold/20 flex items-center justify-center will-change-transform"
+              className={`w-24 h-24 rounded-full bg-divine-saffron/20 flex items-center justify-center will-change-transform`}
             >
               <motion.div 
                 className="w-20 h-20 rounded-full bg-divine-saffron flex items-center justify-center will-change-transform"
@@ -90,10 +94,14 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             </motion.div>
 
             <div className="flex flex-col items-center space-y-4 z-[10000]">
-              <h1 className="text-3xl font-mukti font-bold text-black">
+              <h1 className={`text-3xl font-mukti font-bold ${
+                isDarkMode ? 'text-white' : 'text-black'
+              }`}>
                 Divine AI
               </h1>
-              <p className="text-lg text-black font-serif">
+              <p className={`text-lg ${
+                isDarkMode ? 'text-white/90' : 'text-black/90'
+              } font-serif`}>
                 Your Personal Guide to Spiritual Wisdom
               </p>
             </div>
