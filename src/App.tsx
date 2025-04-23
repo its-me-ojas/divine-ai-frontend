@@ -105,8 +105,8 @@ function App() {
                   } />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-                <Toaster />
-                <Sonner />
+                <Toaster position="bottom-center" />
+                <Sonner position="bottom-right" className="mb-20" />
               </AuthProvider>
             </BrowserRouter>
           </TooltipProvider>
