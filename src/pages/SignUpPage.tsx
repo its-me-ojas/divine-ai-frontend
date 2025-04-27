@@ -25,6 +25,9 @@ const SignUpPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // For debugging:
+    console.log("Signup form submission:", { name, email, password, confirmPassword });
+    
     if (password !== confirmPassword) {
       toast({
         title: "Error",
@@ -48,20 +51,15 @@ const SignUpPage = () => {
     setIsLoading(true);
 
     try {
-      await signUp(email, password, name);
-      toast({
-        title: "Welcome!",
-        description: "Your account has been created successfully.",
-        duration: 3000,
-      });
-      navigate("/");
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to create account. Please try again.",
-        variant: "destructive",
-        duration: 3000,
-      });
+      // Note: The API doesn't actually use the name parameter
+      // But our AuthContext signature expects it
+      await signUp(name, email, password);
+      
+      // The toast notification is already handled in the AuthContext
+    } catch (error: any) {
+      console.error("Signup error on page:", error);
+      
+      // Toast is already handled in AuthContext, no need to duplicate
     } finally {
       setIsLoading(false);
     }

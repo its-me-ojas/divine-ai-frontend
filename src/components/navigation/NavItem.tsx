@@ -27,7 +27,7 @@ const NavItem = ({ to, icon, label, isActive, variants, custom }: NavItemProps) 
       <Link
         to={to}
         className={cn(
-          "flex flex-col items-center justify-center gap-1.5 p-2 rounded-lg transition-colors",
+          "flex flex-col items-center justify-center gap-1.5 p-2 rounded-lg transition-colors touch-manipulation min-h-[56px] min-w-[56px]",
           isActive
             ? "text-primary"
             : "text-muted-foreground hover:text-foreground"

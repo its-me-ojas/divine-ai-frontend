@@ -49,6 +49,7 @@ const ChatPage = () => {
       
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
+      console.error("Error asking question:", error);
       // Handle error by showing an error message
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),

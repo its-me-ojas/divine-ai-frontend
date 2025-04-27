@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { motion } from "framer-motion";
@@ -9,14 +9,27 @@ import { Switch } from "@/components/ui/switch";
 import { Edit, User, Save } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/components/ui/use-toast";
+import { api } from "@/lib/api";
 
 const ProfilePage = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const { user, signOut } = useAuth();
+  const { toast } = useToast();
+  const [isEditing, setIsEditing] = useState(false);
+  const [fullName, setFullName] = useState(user?.full_name || "");
+  const [isSaving, setIsSaving] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(() => {
     const hasAnimated = sessionStorage.getItem("profileAnimated");
     return !hasAnimated;
   });
+
+  // Update local state when user data changes
+  useEffect(() => {
+    if (user) {
+      setFullName(user.full_name || "");
+    }
+  }, [user]);
 
   useEffect(() => {
     if (shouldAnimate) {
@@ -25,6 +38,36 @@ const ProfilePage = () => {
       return () => clearTimeout(timer);
     }
   }, [shouldAnimate]);
+
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleSaveProfile = async () => {
+    // This would be implemented if you have an endpoint to update user profile
+    setIsSaving(true);
+    try {
+      // Call the API to update the user profile
+      await api.updateUserProfile({ full_name: fullName });
+      
+      toast({
+        title: "Profile Updated",
+        description: "Your profile has been successfully updated.",
+        duration: 3000,
+      });
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      toast({
+        title: "Update Failed",
+        description: "Failed to update your profile. Please try again.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   // Staggered animation for containers
   const containerVariants = {
@@ -66,8 +109,12 @@ const ProfilePage = () => {
           >
             <motion.div variants={childVariants} className="flex items-center justify-between">
               <h2 className="text-xl font-mukti font-semibold">Personal Information</h2>
-              <Button variant="ghost" size="icon">
-                <Edit size={18} className="text-divine-blue/70 dark:text-white/70" />
+              <Button variant="ghost" size="icon" onClick={handleEditToggle}>
+                {isEditing ? (
+                  <Save size={18} className="text-divine-blue/70 dark:text-white/70" />
+                ) : (
+                  <Edit size={18} className="text-divine-blue/70 dark:text-white/70" />
+                )}
               </Button>
             </motion.div>
             
@@ -77,25 +124,74 @@ const ProfilePage = () => {
                   <User size={32} className="text-divine-saffron" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium">{user?.name || "User"}</h3>
+                  <h3 className="text-lg font-medium">{fullName || "User"}</h3>
                   <p className="text-divine-blue/70 dark:text-white/70">{user?.email || "email@example.com"}</p>
                 </div>
               </div>
               
-              <div className="space-y-4 pt-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input id="name" defaultValue={user?.name || ""} />
+              {isEditing ? (
+                <div className="space-y-4 pt-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name</Label>
+                    <Input 
+                      id="name" 
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      value={user?.email || ""}
+                      disabled 
+                      className="opacity-70"
+                    />
+                    <p className="text-xs text-divine-blue/60 dark:text-white/60">Email cannot be changed</p>
+                  </div>
+                  <Button 
+                    className="w-full"
+                    onClick={handleSaveProfile}
+                    disabled={isSaving}
+                  >
+                    {isSaving ? (
+                      <>
+                        <div className="animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <Save size={16} className="mr-2" />
+                        Save Changes
+                      </>
+                    )}
+                  </Button>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" defaultValue={user?.email || ""} />
+              ) : (
+                <div className="space-y-4 pt-4">
+                  <div className="grid grid-cols-3 gap-2">
+                    <Label className="text-divine-blue/70 dark:text-white/70">Full Name:</Label>
+                    <span className="col-span-2">{fullName || "Not set"}</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <Label className="text-divine-blue/70 dark:text-white/70">Email:</Label>
+                    <span className="col-span-2">{user?.email || "email@example.com"}</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <Label className="text-divine-blue/70 dark:text-white/70">Member Since:</Label>
+                    <span className="col-span-2">
+                      {user?.created_at 
+                        ? new Date(user.created_at).toLocaleDateString(undefined, { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })
+                        : "N/A"}
+                    </span>
+                  </div>
                 </div>
-                <Button className="w-full">
-                  <Save size={16} className="mr-2" />
-                  Save Changes
-                </Button>
-              </div>
+              )}
             </motion.div>
           </motion.div>
           

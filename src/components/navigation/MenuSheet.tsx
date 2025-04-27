@@ -91,18 +91,18 @@ const MenuSheet = ({
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button
-          className="p-2 rounded-lg hover:bg-accent/50 transition-all duration-200 active:scale-95"
+          className="p-2.5 rounded-lg hover:bg-accent/50 transition-all duration-200 active:scale-95 touch-manipulation"
           aria-label="Open menu"
         >
-          <Menu size={24} />
+          <Menu size={26} />
         </button>
       </SheetTrigger>
       <SheetContent 
         side="right" 
-        className="w-[280px] sm:w-[320px] bg-background/95 dark:bg-background/95 border-border backdrop-blur-xl p-6"
+        className="w-[280px] sm:w-[320px] bg-background/95 dark:bg-background/95 border-border backdrop-blur-xl p-6 overflow-y-auto max-h-[100svh]"
       >
         <motion.div 
-          className="space-y-6"
+          className="space-y-6 pb-safe"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.2 }}
@@ -204,14 +204,14 @@ const MenuSheet = ({
               >
                 <SelectTrigger 
                   id="language" 
-                  className="bg-background/50 border-border/50 hover:bg-accent/30 transition-colors"
+                  className="bg-background/50 border-border/50 hover:bg-accent/30 transition-colors h-10 px-3"
                 >
                   <SelectValue placeholder="Select Language" />
                 </SelectTrigger>
-                <SelectContent className="bg-background/95 backdrop-blur-xl border-border/50">
-                  <SelectItem value="en" className="hover:bg-accent/30">English</SelectItem>
-                  <SelectItem value="hi" className="hover:bg-accent/30">हिंदी</SelectItem>
-                  <SelectItem value="sa" className="hover:bg-accent/30">संस्कृतम्</SelectItem>
+                <SelectContent className="bg-background/95 backdrop-blur-xl border-border/50 max-h-[200px]">
+                  <SelectItem value="en" className="hover:bg-accent/30 py-2.5">English</SelectItem>
+                  <SelectItem value="hi" className="hover:bg-accent/30 py-2.5">हिंदी</SelectItem>
+                  <SelectItem value="sa" className="hover:bg-accent/30 py-2.5">संस्कृतम्</SelectItem>
                 </SelectContent>
               </Select>
             </div>
