@@ -24,7 +24,8 @@
     "success": "सफल",
     "loading": "लोड हो रहा है...",
     "noResults": "कोई परिणाम नहीं मिला",
-    "gita": "गीता"
+    "gita": "गीता",
+    "copiedToClipboard": "क्लिपबोर्ड पर कॉपी किया गया"
   },
   "chat": {
     "greeting": "नमस्ते!",
@@ -47,7 +48,15 @@
     "search": "श्लोक खोजें...",
     "bookmark": "बुकमार्क करें",
     "unbookmark": "बुकमार्क हटाएं",
-    "share": "श्लोक साझा करें"
+    "share": "श्लोक साझा करें",
+    "verseOfTheDay": "आज का श्लोक",
+    "daily": "दैनिक",
+    "savedToast": "श्लोक सहेजा गया",
+    "savedDescription": "आप इस श्लोक को अपने सहेजे गए आइटम में पा सकते हैं",
+    "unsavedToast": "श्लोक सहेजे गए से हटा दिया गया", 
+    "unsavedDescription": "श्लोक आपके सहेजे गए आइटम से हटा दिया गया है",
+    "verseCopied": "श्लोक आपके क्लिपबोर्ड पर कॉपी कर दिया गया है",
+    "bhagavadGita": "भगवद गीता"
   },
   "wisdom": {
     "title": "दिव्य ज्ञान",
@@ -77,5 +86,16 @@
     "seeker": "साधक",
     "devoted": "समर्पित",
     "scholar": "विद्वान"
+  },
+  "menu": {
+    "explore": "अन्वेषण करें",
+    "recentActivity": "हाल की गतिविधि",
+    "account": "खाता",
+    "language": "भाषा",
+    "newItems": "{{count}} नए",
+    "recentVerse": "अध्याय {{chapter}}, श्लोक {{verse}}",
+    "savedItem": "सहेजा गया: {{item}}",
+    "karmaYoga": "कर्म योग",
+    "daysCount": "{{count}} दिन"
   }
 } 

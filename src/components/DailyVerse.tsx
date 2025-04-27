@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
+import { useTranslation } from "react-i18next";
 
 interface DailyVerseProps {
   verse: {
@@ -23,24 +24,25 @@ const DailyVerse = ({ verse, shouldAnimate = false }: DailyVerseProps) => {
     return saved === "true";
   });
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleSave = () => {
     setIsSaved(!isSaved);
     localStorage.setItem(`saved-verse-${verse.chapter}-${verse.verse}`, (!isSaved).toString());
     toast({
-      title: isSaved ? "Verse removed from saved" : "Verse saved",
-      description: isSaved ? "The verse has been removed from your saved items" : "You can find this verse in your saved items",
+      title: isSaved ? t("verses.unsavedToast") : t("verses.savedToast"),
+      description: isSaved ? t("verses.unsavedDescription") : t("verses.savedDescription"),
       duration: 2000
     });
   };
 
   const handleShare = async () => {
-    const text = `${verse.sanskrit}\n\n${verse.translation}\n\n${verse.explanation}\n\nBhagavad Gita - Chapter ${verse.chapter}, Verse ${verse.verse}`;
+    const text = `${verse.sanskrit}\n\n${verse.translation}\n\n${verse.explanation}\n\n${t("verses.bhagavadGita")} - ${t("verses.chapterVerse", { chapter: verse.chapter, verse: verse.verse })}`;
     
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Bhagavad Gita - Chapter ${verse.chapter}, Verse ${verse.verse}`,
+          title: `${t("verses.bhagavadGita")} - ${t("verses.chapterVerse", { chapter: verse.chapter, verse: verse.verse })}`,
           text,
           url: window.location.href,
         });
@@ -50,8 +52,8 @@ const DailyVerse = ({ verse, shouldAnimate = false }: DailyVerseProps) => {
     } else {
       navigator.clipboard.writeText(text);
       toast({
-        title: "Copied to clipboard",
-        description: "The verse has been copied to your clipboard",
+        title: t("common.copiedToClipboard"),
+        description: t("verses.verseCopied"),
         duration: 2000
       });
     }
@@ -92,7 +94,7 @@ const DailyVerse = ({ verse, shouldAnimate = false }: DailyVerseProps) => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                Verse of the Day
+                {t("verses.verseOfTheDay")}
               </motion.h2>
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -100,7 +102,7 @@ const DailyVerse = ({ verse, shouldAnimate = false }: DailyVerseProps) => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Badge variant="secondary" className="bg-divine-gold/10 text-divine-saffron text-[10px] px-2 py-0.5">
-                  Daily
+                  {t("verses.daily")}
                 </Badge>
               </motion.div>
             </div>
@@ -187,7 +189,7 @@ const DailyVerse = ({ verse, shouldAnimate = false }: DailyVerseProps) => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            Chapter {verse.chapter}, Verse {verse.verse}
+            {t("verses.chapterVerse", { chapter: verse.chapter, verse: verse.verse })}
           </motion.div>
           <Link to="/read">
             <motion.div
@@ -200,7 +202,7 @@ const DailyVerse = ({ verse, shouldAnimate = false }: DailyVerseProps) => {
                 size="sm" 
                 className="gap-2 text-divine-blue dark:text-white hover:bg-divine-gold/10 hover:text-divine-saffron"
               >
-                Read More
+                {t("common.readMore")}
                 <ArrowRight size={16} />
               </Button>
             </motion.div>

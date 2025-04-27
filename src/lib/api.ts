@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Make sure this matches your backend API port (not frontend port)
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'http://34.93.56.90';
 
 // Create axios instance with base URL
 const apiClient = axios.create({

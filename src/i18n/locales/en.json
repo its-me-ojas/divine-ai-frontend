@@ -24,7 +24,8 @@
     "success": "Success",
     "loading": "Loading...",
     "noResults": "No results found",
-    "gita": "Gita"
+    "gita": "Gita",
+    "copiedToClipboard": "Copied to clipboard"
   },
   "chat": {
     "greeting": "Namaste!",
@@ -47,7 +48,15 @@
     "search": "Search verses...",
     "bookmark": "Bookmark",
     "unbookmark": "Remove bookmark",
-    "share": "Share verse"
+    "share": "Share verse",
+    "verseOfTheDay": "Verse of the Day",
+    "daily": "Daily",
+    "savedToast": "Verse saved",
+    "savedDescription": "You can find this verse in your saved items",
+    "unsavedToast": "Verse removed from saved",
+    "unsavedDescription": "The verse has been removed from your saved items",
+    "verseCopied": "The verse has been copied to your clipboard",
+    "bhagavadGita": "Bhagavad Gita"
   },
   "wisdom": {
     "title": "Divine Wisdom",
@@ -77,5 +86,16 @@
     "seeker": "Seeker",
     "devoted": "Devoted",
     "scholar": "Scholar"
+  },
+  "menu": {
+    "explore": "Explore",
+    "recentActivity": "Recent Activity",
+    "account": "Account",
+    "language": "Language",
+    "newItems": "{{count}} new",
+    "recentVerse": "Chapter {{chapter}}, Verse {{verse}}",
+    "savedItem": "Saved: {{item}}",
+    "karmaYoga": "Karma Yoga",
+    "daysCount": "{{count}} days"
   }
 } 

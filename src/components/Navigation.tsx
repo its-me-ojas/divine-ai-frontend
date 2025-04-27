@@ -61,9 +61,9 @@ const Navigation = () => {
 
   // Main navigation items
   const mainNavItems = [
-    { to: "/", icon: <Home size={24} />, label: "Home" },
-    { to: "/read", icon: <Book size={24} />, label: "Read" },
-    { to: "/chat", icon: <MessageCircle size={24} />, label: "Ask" },
+    { to: "/", icon: <Home size={24} />, label: t("common.home") },
+    { to: "/read", icon: <Book size={24} />, label: t("common.verses") },
+    { to: "/chat", icon: <MessageCircle size={24} />, label: t("common.askAI") },
   ];
 
   return (

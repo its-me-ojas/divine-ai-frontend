@@ -2,12 +2,14 @@ import { User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const [shouldAnimate, setShouldAnimate] = useState(() => {
     const hasAnimated = sessionStorage.getItem("headerAnimated");
     return !hasAnimated;
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (shouldAnimate) {
@@ -69,7 +71,11 @@ const Header = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <Link to="/profile" className="w-9 h-9 rounded-full bg-divine-cream dark:bg-divine-dark flex items-center justify-center shadow-sm border border-divine-lightGold/30 dark:border-divine-gold/20">
+        <Link 
+          to="/profile" 
+          className="w-9 h-9 rounded-full bg-divine-cream dark:bg-divine-dark flex items-center justify-center shadow-sm border border-divine-lightGold/30 dark:border-divine-gold/20"
+          aria-label={t("common.profile")}
+        >
           <User size={18} className="text-divine-dark dark:text-white" />
         </Link>
       </motion.div>

@@ -110,38 +110,38 @@ const MenuSheet = ({
           {/* Navigation */}
           <div className="space-y-2">
             <h2 className="text-base font-semibold tracking-tight mb-3 text-foreground/90 px-3">
-              Explore
+              {t("menu.explore")}
             </h2>
             <MenuLink to="/verses" icon={<BookOpen size={18} />} onClick={() => setIsOpen(false)}>
-              Verses
+              {t("common.verses")}
             </MenuLink>
             <MenuLink to="/wisdom" icon={<BookText size={18} />} onClick={() => setIsOpen(false)}>
-              Wisdom
+              {t("common.wisdom")}
             </MenuLink>
             <MenuLink 
               to="/bookmarks" 
               icon={<Bookmark size={18} />} 
               onClick={() => setIsOpen(false)}
-              badge="3 new"
+              badge={t("menu.newItems", { count: 3 })}
             >
-              Saved
+              {t("common.saved")}
             </MenuLink>
           </div>
 
           {/* Recent Activity */}
           <div className="space-y-2 pt-4 border-t border-border/50">
             <h2 className="text-base font-semibold tracking-tight mb-3 text-foreground/90 px-3">
-              Recent Activity
+              {t("menu.recentActivity")}
             </h2>
             <div className="space-y-1">
               <RecentItem
                 icon={<BookOpen size={16} />}
-                title="Chapter 2, Verse 47"
+                title={t("menu.recentVerse", { chapter: 2, verse: 47 })}
                 time="2h"
               />
               <RecentItem
                 icon={<Bookmark size={16} />}
-                title="Saved: Karma Yoga"
+                title={t("menu.savedItem", { item: t("menu.karmaYoga") })}
                 time="1d"
               />
             </div>
@@ -150,30 +150,30 @@ const MenuSheet = ({
           {/* Account */}
           <div className="space-y-2 pt-4 border-t border-border/50">
             <h2 className="text-base font-semibold tracking-tight mb-3 text-foreground/90 px-3">
-              Account
+              {t("menu.account")}
             </h2>
             <MenuLink to="/profile" icon={<User size={18} />} onClick={() => setIsOpen(false)}>
-              Profile
+              {t("common.profile")}
             </MenuLink>
             <MenuLink 
               to="/streaks" 
               icon={<Award size={18} />} 
               onClick={() => setIsOpen(false)}
-              badge="7 days"
+              badge={t("menu.daysCount", { count: 7 })}
             >
-              Streaks
+              {t("common.streaks")}
             </MenuLink>
           </div>
 
           {/* Settings */}
           <div className="space-y-3 pt-4 border-t border-border/50">
             <h2 className="text-base font-semibold tracking-tight mb-3 text-foreground/90 px-3">
-              Settings
+              {t("common.settings")}
             </h2>
             <div className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-accent/30 transition-colors">
               <Label htmlFor="dark-mode" className="flex items-center gap-3 text-sm font-medium cursor-pointer">
                 <Moon size={18} className="text-foreground/70" />
-                Dark Mode
+                {t("common.darkMode")}
               </Label>
               <Switch
                 id="dark-mode"
@@ -185,7 +185,7 @@ const MenuSheet = ({
             <div className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-accent/30 transition-colors">
               <Label htmlFor="notifications" className="flex items-center gap-3 text-sm font-medium cursor-pointer">
                 <Bell size={18} className="text-foreground/70" />
-                Notifications
+                {t("common.notifications")}
               </Label>
               <Switch
                 id="notifications"
@@ -196,7 +196,7 @@ const MenuSheet = ({
             </div>
             <div className="py-2 px-3">
               <Label htmlFor="language" className="text-sm font-medium mb-2 block text-foreground/90">
-                Language
+                {t("menu.language")}
               </Label>
               <Select
                 defaultValue={i18n.language}
@@ -206,7 +206,7 @@ const MenuSheet = ({
                   id="language" 
                   className="bg-background/50 border-border/50 hover:bg-accent/30 transition-colors h-10 px-3"
                 >
-                  <SelectValue placeholder="Select Language" />
+                  <SelectValue placeholder={t("common.selectLanguage")} />
                 </SelectTrigger>
                 <SelectContent className="bg-background/95 backdrop-blur-xl border-border/50 max-h-[200px]">
                   <SelectItem value="en" className="hover:bg-accent/30 py-2.5">English</SelectItem>
