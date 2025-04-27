@@ -3,6 +3,9 @@ import axios from 'axios';
 // Make sure this matches your backend API port (not frontend port)
 const API_BASE_URL = 'http://34.93.56.90';
 
+// Enable credentials for cross-origin requests
+axios.defaults.withCredentials = true;
+
 // Create axios instance with base URL
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
